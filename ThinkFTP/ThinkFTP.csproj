@@ -58,7 +58,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ValidatingTextBox.cs">
+    <Compile Include="HelpClasses\ValidatingTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
@@ -83,19 +83,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\upload161.png" />
-    <None Include="Resources\upload16.png" />
+    <Content Include="Resources\upload16.png" />
     <None Include="Resources\selectFile16.png" />
     <None Include="Resources\selectFolder16.png" />
-    <None Include="Resources\selectFolder.png" />
-    <None Include="Resources\folder.png" />
-    <None Include="Resources\openFolder.png" />
-    <None Include="Resources\fileBlue.ico" />
-    <None Include="Resources\Knob Upload.png" />
-    <None Include="Resources\Arrowup.ico" />
-    <None Include="Resources\Back.png" />
     <None Include="Resources\download16.png" />
-    <Content Include="Resources\Properties.xml">
+    <Content Include="Resources\Instances.xml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

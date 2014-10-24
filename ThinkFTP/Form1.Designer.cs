@@ -33,8 +33,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.iseriesTabPage = new System.Windows.Forms.TabPage();
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.btnDownload = new System.Windows.Forms.Button();
+            this.btnUpload = new System.Windows.Forms.Button();
             this.listBoxTranFiles = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnSelectFile = new System.Windows.Forms.Button();
+            this.btnSelectFolder = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rButtonMultipleFiles = new System.Windows.Forms.RadioButton();
@@ -49,10 +53,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.otherTabPage = new System.Windows.Forms.TabPage();
             this.errorProv = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnDownload = new System.Windows.Forms.Button();
-            this.btnUpload = new System.Windows.Forms.Button();
-            this.btnSelectFile = new System.Windows.Forms.Button();
-            this.btnSelectFolder = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmbInstances = new System.Windows.Forms.ComboBox();
             this.txtISFIle = new ThinkFTP.ValidatingTextBox();
             this.txtLibrary = new ThinkFTP.ValidatingTextBox();
             this.txtPassword = new ThinkFTP.ValidatingTextBox();
@@ -117,6 +119,29 @@
             this.panelButtons.Size = new System.Drawing.Size(265, 53);
             this.panelButtons.TabIndex = 7;
             // 
+            // btnDownload
+            // 
+            this.btnDownload.Image = global::ThinkFTP.Properties.Resources.download16;
+            this.btnDownload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDownload.Location = new System.Drawing.Point(147, 13);
+            this.btnDownload.Name = "btnDownload";
+            this.btnDownload.Size = new System.Drawing.Size(103, 25);
+            this.btnDownload.TabIndex = 9;
+            this.btnDownload.Text = "Download";
+            this.btnDownload.UseVisualStyleBackColor = true;
+            // 
+            // btnUpload
+            // 
+            this.btnUpload.Image = ((System.Drawing.Image)(resources.GetObject("btnUpload.Image")));
+            this.btnUpload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUpload.Location = new System.Drawing.Point(12, 13);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(99, 25);
+            this.btnUpload.TabIndex = 8;
+            this.btnUpload.Text = "Upload";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            // 
             // listBoxTranFiles
             // 
             this.listBoxTranFiles.FormattingEnabled = true;
@@ -132,6 +157,28 @@
             this.label5.Size = new System.Drawing.Size(88, 17);
             this.label5.TabIndex = 16;
             this.label5.Text = "Transferred Files";
+            // 
+            // btnSelectFile
+            // 
+            this.btnSelectFile.Image = global::ThinkFTP.Properties.Resources.selectFile16;
+            this.btnSelectFile.Location = new System.Drawing.Point(366, 183);
+            this.btnSelectFile.Name = "btnSelectFile";
+            this.btnSelectFile.Size = new System.Drawing.Size(28, 23);
+            this.btnSelectFile.TabIndex = 14;
+            this.btnSelectFile.TabStop = false;
+            this.btnSelectFile.UseVisualStyleBackColor = true;
+            this.btnSelectFile.Click += new System.EventHandler(this.btnSelectFile_Click);
+            // 
+            // btnSelectFolder
+            // 
+            this.btnSelectFolder.Image = global::ThinkFTP.Properties.Resources.selectFolder16;
+            this.btnSelectFolder.Location = new System.Drawing.Point(366, 153);
+            this.btnSelectFolder.Name = "btnSelectFolder";
+            this.btnSelectFolder.Size = new System.Drawing.Size(28, 23);
+            this.btnSelectFolder.TabIndex = 13;
+            this.btnSelectFolder.TabStop = false;
+            this.btnSelectFolder.UseVisualStyleBackColor = true;
+            this.btnSelectFolder.Click += new System.EventHandler(this.btnSelectFolder_Click);
             // 
             // btnExit
             // 
@@ -210,6 +257,8 @@
             // 
             // serverGB
             // 
+            this.serverGB.Controls.Add(this.cmbInstances);
+            this.serverGB.Controls.Add(this.label6);
             this.serverGB.Controls.Add(this.txtPassword);
             this.serverGB.Controls.Add(this.txtUserName);
             this.serverGB.Controls.Add(this.txtAddress);
@@ -263,54 +312,27 @@
             this.errorProv.ContainerControl = this;
             this.errorProv.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProv.Icon")));
             // 
-            // btnDownload
+            // label6
             // 
-            this.btnDownload.Image = global::ThinkFTP.Properties.Resources.download16;
-            this.btnDownload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDownload.Location = new System.Drawing.Point(147, 13);
-            this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(103, 25);
-            this.btnDownload.TabIndex = 9;
-            this.btnDownload.Text = "Download";
-            this.btnDownload.UseVisualStyleBackColor = true;
+            this.label6.Location = new System.Drawing.Point(277, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 17);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Instance";
             // 
-            // btnUpload
+            // cmbInstances
             // 
-            this.btnUpload.Image = global::ThinkFTP.Properties.Resources.upload16;
-            this.btnUpload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpload.Location = new System.Drawing.Point(12, 13);
-            this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(99, 25);
-            this.btnUpload.TabIndex = 8;
-            this.btnUpload.Text = "Upload";
-            this.btnUpload.UseVisualStyleBackColor = true;
-            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
-            // 
-            // btnSelectFile
-            // 
-            this.btnSelectFile.Image = global::ThinkFTP.Properties.Resources.selectFile16;
-            this.btnSelectFile.Location = new System.Drawing.Point(366, 183);
-            this.btnSelectFile.Name = "btnSelectFile";
-            this.btnSelectFile.Size = new System.Drawing.Size(28, 23);
-            this.btnSelectFile.TabIndex = 14;
-            this.btnSelectFile.TabStop = false;
-            this.btnSelectFile.UseVisualStyleBackColor = true;
-            this.btnSelectFile.Click += new System.EventHandler(this.btnSelectFile_Click);
-            // 
-            // btnSelectFolder
-            // 
-            this.btnSelectFolder.Image = global::ThinkFTP.Properties.Resources.selectFolder16;
-            this.btnSelectFolder.Location = new System.Drawing.Point(366, 153);
-            this.btnSelectFolder.Name = "btnSelectFolder";
-            this.btnSelectFolder.Size = new System.Drawing.Size(28, 23);
-            this.btnSelectFolder.TabIndex = 13;
-            this.btnSelectFolder.TabStop = false;
-            this.btnSelectFolder.UseVisualStyleBackColor = true;
-            this.btnSelectFolder.Click += new System.EventHandler(this.btnSelectFolder_Click);
+            this.cmbInstances.BackColor = System.Drawing.Color.SeaShell;
+            this.cmbInstances.FormattingEnabled = true;
+            this.cmbInstances.Location = new System.Drawing.Point(340, 23);
+            this.cmbInstances.Name = "cmbInstances";
+            this.cmbInstances.Size = new System.Drawing.Size(155, 21);
+            this.cmbInstances.TabIndex = 99;
+            this.cmbInstances.TabStop = false;
             // 
             // txtISFIle
             // 
-            this.txtISFIle.ControlToValidate = this.panelButtons;
+            this.txtISFIle.ControlToValidate = null;
             this.txtISFIle.Location = new System.Drawing.Point(239, 125);
             this.txtISFIle.Name = "txtISFIle";
             this.txtISFIle.Size = new System.Drawing.Size(155, 20);
@@ -366,7 +388,7 @@
             // 
             // txtWindowsFile
             // 
-            this.txtWindowsFile.ControlToValidate = this.panelButtons;
+            this.txtWindowsFile.ControlToValidate = null;
             this.txtWindowsFile.Location = new System.Drawing.Point(239, 185);
             this.txtWindowsFile.Name = "txtWindowsFile";
             this.txtWindowsFile.Size = new System.Drawing.Size(155, 20);
@@ -432,6 +454,8 @@
         private ValidatingTextBox txtLibrary;
         private ValidatingTextBox txtWindowsPath;
         private ValidatingTextBox txtWindowsFile;
+        private System.Windows.Forms.ComboBox cmbInstances;
+        private System.Windows.Forms.Label label6;
     }
 }
 

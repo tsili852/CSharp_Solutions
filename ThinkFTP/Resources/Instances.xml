@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Instances>
+  <Instance>
+    <id>1</id>
+    <name>Piraeus SAVF</name>
+    <serverAddress>UNS400</serverAddress>
+    <userName>NIKOST</userName>
+    <library>QGPL</library>
+    <iSeriesFile>IPSAVF</iSeriesFile>
+    <windowsPath>C:\SaveFiles</windowsPath>
+    <windowsFile>IPSAVF</windowsFile>
+    <amount>O</amount>
+  </Instance>
+  <Instance>
+    <id>1</id>
+    <name>ING SAVF</name>
+    <serverAddress>UNS400</serverAddress>
+    <userName>NIKOST</userName>
+    <library>QGPL</library>
+    <iSeriesFile>INGSAVF</iSeriesFile>
+    <windowsPath>C:\SaveFiles</windowsPath>
+    <windowsFile>INGSAVF</windowsFile>
+    <amount>M</amount>
+  </Instance>
+</Instances>
