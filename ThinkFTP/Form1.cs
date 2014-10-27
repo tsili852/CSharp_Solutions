@@ -117,7 +117,11 @@ namespace ThinkFTP
             panelButtons.Enabled = false;
 
             Instance inst = new Instance();
-            inst.getFromXML(ThinkFTP.Properties.Resources.Instances, 1);
+            inst.fillFromXML(Properties.Resources.Instances, 1);
+
+            fillFromInstance(inst);
+            cmbInstances.Items.Add(inst.Name);
+            cmbInstances.SelectedIndex = 0;
         }
 
         private void rButtonMultipleFiles_CheckedChanged(object sender, EventArgs e)
@@ -190,6 +194,16 @@ namespace ThinkFTP
         private void btnUpload_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void fillFromInstance(Instance inst)
+        {
+            txtAddress.Text = inst.Address;
+            txtUserName.Text = inst.UserName;
+            txtLibrary.Text = inst.Library;
+            txtISFIle.Text = inst.iSeriesFile;
+            txtWindowsPath.Text = inst.WindowsPath;
+            txtWindowsFile.Text = inst.WindowsFile;
         }
 
 

@@ -1,24 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Instances>
   <Instance id="1">
-    <name>Piraeus SAVF</name>
-    <serverAddress>UNS400</serverAddress>
-    <userName>NIKOST</userName>
-    <library>QGPL</library>
-    <iSeriesFile>IPSAVF</iSeriesFile>
-    <windowsPath>C:\SaveFiles</windowsPath>
-    <windowsFile>IPSAVF</windowsFile>
-    <mode>O</mode>
+    <field type="name">Piraeus SAVF</field>
+    <field type="serverAddress">UNS400</field>
+    <field type="userName">NIKOST</field>
+    <field type ="library">QGPL</field>
+    <field type="iSeriesFile">IPSAVF</field>
+    <field type="windowsPath">C:\SaveFiles</field>
+    <field type="windowsFile">IPSAVF</field>
+    <field type="mode">S</field>
   </Instance>
   <Instance id="2">
-    <id>1</id>
-    <name>ING SAVF</name>
-    <serverAddress>UNS400</serverAddress>
-    <userName>NIKOST</userName>
-    <library>QGPL</library>
-    <iSeriesFile>INGSAVF</iSeriesFile>
-    <windowsPath>C:\SaveFiles</windowsPath>
-    <windowsFile>INGSAVF</windowsFile>
-    <mode>M</mode>
+    <field type="name">ING SAVF</field>
+    <field type="serverAddress">UNS400</field>
+    <field type="userName">NIKOST</field>
+    <field type ="library">QGPL</field>
+    <field type="iSeriesFile">INGSAVF</field>
+    <field type="windowsPath">C:\SaveFiles</field>
+    <field type="windowsFile">INGSAVF</field>
+    <field type="mode">M</field>
   </Instance>
 </Instances>

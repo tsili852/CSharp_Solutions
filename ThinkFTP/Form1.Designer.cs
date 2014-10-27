@@ -49,13 +49,13 @@ namespace ThinkFTP
             this.lblISFile = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.serverGB = new System.Windows.Forms.GroupBox();
+            this.cmbInstances = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.otherTabPage = new System.Windows.Forms.TabPage();
             this.errorProv = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmbInstances = new System.Windows.Forms.ComboBox();
             this.txtISFIle = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtLibrary = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtPassword = new ThinkFTP.HelpClasses.ValidatingTextBox();
@@ -273,6 +273,25 @@ namespace ThinkFTP
             this.serverGB.TabStop = false;
             this.serverGB.Text = "Server Information";
             // 
+            // cmbInstances
+            // 
+            this.cmbInstances.BackColor = System.Drawing.Color.SeaShell;
+            this.cmbInstances.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbInstances.FormattingEnabled = true;
+            this.cmbInstances.Location = new System.Drawing.Point(340, 23);
+            this.cmbInstances.Name = "cmbInstances";
+            this.cmbInstances.Size = new System.Drawing.Size(155, 21);
+            this.cmbInstances.TabIndex = 99;
+            this.cmbInstances.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(277, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 17);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Instance";
+            // 
             // label3
             // 
             this.label3.Location = new System.Drawing.Point(277, 52);
@@ -312,24 +331,6 @@ namespace ThinkFTP
             this.errorProv.BlinkRate = 200;
             this.errorProv.ContainerControl = this;
             this.errorProv.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProv.Icon")));
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(277, 26);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 17);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Instance";
-            // 
-            // cmbInstances
-            // 
-            this.cmbInstances.BackColor = System.Drawing.Color.SeaShell;
-            this.cmbInstances.FormattingEnabled = true;
-            this.cmbInstances.Location = new System.Drawing.Point(340, 23);
-            this.cmbInstances.Name = "cmbInstances";
-            this.cmbInstances.Size = new System.Drawing.Size(155, 21);
-            this.cmbInstances.TabIndex = 99;
-            this.cmbInstances.TabStop = false;
             // 
             // txtISFIle
             // 
