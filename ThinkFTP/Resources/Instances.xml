@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Instances>
-  <Instance>
-    <id>1</id>
+  <Instance id="1">
     <name>Piraeus SAVF</name>
     <serverAddress>UNS400</serverAddress>
     <userName>NIKOST</userName>
@@ -9,9 +8,9 @@
     <iSeriesFile>IPSAVF</iSeriesFile>
     <windowsPath>C:\SaveFiles</windowsPath>
     <windowsFile>IPSAVF</windowsFile>
-    <amount>O</amount>
+    <mode>O</mode>
   </Instance>
-  <Instance>
+  <Instance id="2">
     <id>1</id>
     <name>ING SAVF</name>
     <serverAddress>UNS400</serverAddress>
@@ -20,6 +19,6 @@
     <iSeriesFile>INGSAVF</iSeriesFile>
     <windowsPath>C:\SaveFiles</windowsPath>
     <windowsFile>INGSAVF</windowsFile>
-    <amount>M</amount>
+    <mode>M</mode>
   </Instance>
 </Instances>

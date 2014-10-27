@@ -1,4 +1,5 @@
-﻿namespace ThinkFTP
+﻿using ThinkFTP.HelpClasses;
+namespace ThinkFTP
 {
     partial class frmMain
     {
@@ -55,13 +56,13 @@
             this.errorProv = new System.Windows.Forms.ErrorProvider(this.components);
             this.label6 = new System.Windows.Forms.Label();
             this.cmbInstances = new System.Windows.Forms.ComboBox();
-            this.txtISFIle = new ThinkFTP.ValidatingTextBox();
-            this.txtLibrary = new ThinkFTP.ValidatingTextBox();
-            this.txtPassword = new ThinkFTP.ValidatingTextBox();
-            this.txtUserName = new ThinkFTP.ValidatingTextBox();
-            this.txtAddress = new ThinkFTP.ValidatingTextBox();
-            this.txtWindowsPath = new ThinkFTP.ValidatingTextBox();
-            this.txtWindowsFile = new ThinkFTP.ValidatingTextBox();
+            this.txtISFIle = new ThinkFTP.HelpClasses.ValidatingTextBox();
+            this.txtLibrary = new ThinkFTP.HelpClasses.ValidatingTextBox();
+            this.txtPassword = new ThinkFTP.HelpClasses.ValidatingTextBox();
+            this.txtUserName = new ThinkFTP.HelpClasses.ValidatingTextBox();
+            this.txtAddress = new ThinkFTP.HelpClasses.ValidatingTextBox();
+            this.txtWindowsPath = new ThinkFTP.HelpClasses.ValidatingTextBox();
+            this.txtWindowsFile = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.tabControl1.SuspendLayout();
             this.iseriesTabPage.SuspendLayout();
             this.panelButtons.SuspendLayout();

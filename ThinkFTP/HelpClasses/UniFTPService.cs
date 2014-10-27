@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace ThinkFTP
+namespace ThinkFTP.HelpClasses
 {
     class UniFtpService
     {

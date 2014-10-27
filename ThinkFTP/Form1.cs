@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
+using ThinkFTP.HelpClasses;
+
 namespace ThinkFTP
 {
     public partial class frmMain : Form
@@ -113,6 +115,9 @@ namespace ThinkFTP
         {
             rButtonOneFIle.Checked = true;
             panelButtons.Enabled = false;
+
+            Instance inst = new Instance();
+            inst.getFromXML(ThinkFTP.Properties.Resources.Instances, 1);
         }
 
         private void rButtonMultipleFiles_CheckedChanged(object sender, EventArgs e)
