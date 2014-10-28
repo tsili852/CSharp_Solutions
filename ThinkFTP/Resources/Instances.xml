@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Instances>
+  <maxID>2</maxID>
   <Instance id="1">
     <field type="name">Piraeus SAVF</field>
     <field type="serverAddress">UNS400</field>
