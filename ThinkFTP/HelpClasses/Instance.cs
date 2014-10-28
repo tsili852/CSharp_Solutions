@@ -4,6 +4,10 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SQLite.Linq;
+using System.Data.SQLite;
+using System.Data.Entity;
+using System.Data.Linq;
 
 namespace ThinkFTP.HelpClasses
 {
@@ -26,24 +30,32 @@ namespace ThinkFTP.HelpClasses
         /// </summary>
         /// <param name="XMLDocument">XML Document path/name</param>
         /// <param name="instanceID">Id of the instance as stored</param>
-        public void fillFromXML(string XMLDocument, int instanceID)
+        public void getWithID(int instanceID)
         {
-            XDocument instDocument = XDocument.Load(Properties.Resources.Instances);
+            var connection = new SQLiteConnection(@"Data Source=ThinkFTPDatabase");
+            var context = new DataContext(connection);
 
-            IEnumerable<XElement> properties = from props in instDocument.Elements("Instance")
-                                               where (int)props.Attribute("id") == instanceID
-                                               select props;
-
-            foreach (var elem in properties)
+            var instances = context.GetTable<Instance>();
+            foreach (var instance in instances)
             {
-                Console.WriteLine("Name: " + elem.Name + " Value: " + elem.Value);
+                Console.WriteLine(instance.Address + " " + instance.iSeriesFile);
             }
+            //using (var context = new InstanceContext())
+            //{
+            //    var data = from a in context.Instance
+            //               //where a.id == instanceID
+            //               select a;
+
+            //    foreach (var instance in data)
+            //    {
+            //        Console.WriteLine(instance.Library);
+            //    }
+            //}
+
         }
 
-        public void saveInstanceToXML(string XMLDocument)
+        public void saveNew(string XMLDocument)
         {
-            XDocument instaDocument = XDocument.Load(XMLDocument);
-
 
         }
     }

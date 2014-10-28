@@ -116,12 +116,8 @@ namespace ThinkFTP
             rButtonOneFIle.Checked = true;
             panelButtons.Enabled = false;
 
-            //Instance inst = new Instance();
-            //inst.fillFromXML(Properties.Resources.Instances, 1);
-
-            //fillFromInstance(inst);
-            //cmbInstances.Items.Add(inst.Name);
-            //cmbInstances.SelectedIndex = 0;
+            Instance inst = new Instance();
+            inst.getWithID(1);
         }
 
         private void rButtonMultipleFiles_CheckedChanged(object sender, EventArgs e)
@@ -231,6 +227,12 @@ namespace ThinkFTP
                 if (contr is TextBox)
                 {
                     ((TextBox)contr).Clear();
+                    errorProv.SetError(((TextBox)contr),"");
+                }
+
+                if (contr is ListBox)
+                {
+                    ((ListBox)contr).Items.Clear();
                 }
 
                 if (contr.HasChildren)
