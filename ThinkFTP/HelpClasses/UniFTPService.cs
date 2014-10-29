@@ -3,7 +3,9 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WinSCP;
 
+// WinSCP .NET Assembly : http://winscp.net/eng/docs/library#csharp
 
 namespace ThinkFTP.HelpClasses
 {
@@ -49,6 +51,19 @@ namespace ThinkFTP.HelpClasses
                     throw;
                 }
             }
+        }
+
+        // Help at : http://winscp.net/eng/docs/library_session_getfiles#example
+        public void secureDownload(string windowsFile, string serverFile)
+        {
+            SessionOptions sessionOptions = new SessionOptions {
+                Protocol = Protocol.Sftp,
+                HostName = serverAddress,
+                UserName = this.userName,
+                Password = this.password,
+                SshHostKeyFingerprint = "ssh-rsa 2048 xx:xx:x"
+            };
+
         }
 
         /// <summary>
