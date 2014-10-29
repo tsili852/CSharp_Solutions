@@ -116,15 +116,15 @@ namespace ThinkFTP
             rButtonOneFIle.Checked = true;
             panelButtons.Enabled = false;
 
-            Instance inst = new Instance();
-            inst.getWithID(1);
+            //Instance inst = new Instance();
+            //inst.getWithID(1);
         }
 
         private void rButtonMultipleFiles_CheckedChanged(object sender, EventArgs e)
         {
             if (rButtonMultipleFiles.Checked == true)
             {
-                txtISFIle.Enabled = false;
+                txtISFIle.Enabled = false; 
                 txtISFIle.Text = "";
                 errorProv.SetError(txtISFIle, null);
                 txtWindowsFile.Enabled = false;

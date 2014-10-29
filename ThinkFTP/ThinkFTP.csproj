@@ -62,6 +62,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WinSCPnet">
+      <HintPath>..\packages\WinSCP.5.5.6\lib\WinSCPnet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -109,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\upload16.png" />
+    <Content Include="WinSCP.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\selectFile16.png" />
     <None Include="Resources\selectFolder16.png" />
     <None Include="Resources\download16.png" />
