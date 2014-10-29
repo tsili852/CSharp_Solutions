@@ -73,22 +73,19 @@ namespace ThinkFTP.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;Instances&gt;
+        ///  &lt;maxID&gt;2&lt;/maxID&gt;
         ///  &lt;Instance id=&quot;1&quot;&gt;
-        ///    &lt;name&gt;Piraeus SAVF&lt;/name&gt;
-        ///    &lt;serverAddress&gt;UNS400&lt;/serverAddress&gt;
-        ///    &lt;userName&gt;NIKOST&lt;/userName&gt;
-        ///    &lt;library&gt;QGPL&lt;/library&gt;
-        ///    &lt;iSeriesFile&gt;IPSAVF&lt;/iSeriesFile&gt;
-        ///    &lt;windowsPath&gt;C:\SaveFiles&lt;/windowsPath&gt;
-        ///    &lt;windowsFile&gt;IPSAVF&lt;/windowsFile&gt;
-        ///    &lt;mode&gt;O&lt;/mode&gt;
+        ///    &lt;field type=&quot;name&quot;&gt;Piraeus SAVF&lt;/field&gt;
+        ///    &lt;field type=&quot;serverAddress&quot;&gt;UNS400&lt;/field&gt;
+        ///    &lt;field type=&quot;userName&quot;&gt;NIKOST&lt;/field&gt;
+        ///    &lt;field type =&quot;library&quot;&gt;QGPL&lt;/field&gt;
+        ///    &lt;field type=&quot;iSeriesFile&quot;&gt;IPSAVF&lt;/field&gt;
+        ///    &lt;field type=&quot;windowsPath&quot;&gt;C:\SaveFiles&lt;/field&gt;
+        ///    &lt;field type=&quot;windowsFile&quot;&gt;IPSAVF&lt;/field&gt;
+        ///    &lt;field type=&quot;mode&quot;&gt;S&lt;/field&gt;
         ///  &lt;/Instance&gt;
         ///  &lt;Instance id=&quot;2&quot;&gt;
-        ///    &lt;id&gt;1&lt;/id&gt;
-        ///    &lt;name&gt;ING SAVF&lt;/name&gt;
-        ///    &lt;serverAddress&gt;UNS400&lt;/serverAddress&gt;
-        ///    &lt;userName&gt;NIKOST&lt;/userName&gt;
-        ///    [rest of string was truncated]&quot;;.
+        ///    &lt;field type=&quot;name&quot;&gt;ING [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Instances {
             get {
@@ -113,6 +110,16 @@ namespace ThinkFTP.Properties {
             get {
                 object obj = ResourceManager.GetObject("selectFolder16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ThinkFTPDatabase {
+            get {
+                object obj = ResourceManager.GetObject("ThinkFTPDatabase", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

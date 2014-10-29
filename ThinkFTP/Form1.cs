@@ -117,11 +117,7 @@ namespace ThinkFTP
             panelButtons.Enabled = false;
 
             Instance inst = new Instance();
-            inst.fillFromXML(Properties.Resources.Instances, 1);
-
-            fillFromInstance(inst);
-            cmbInstances.Items.Add(inst.Name);
-            cmbInstances.SelectedIndex = 0;
+            inst.getWithID(1);
         }
 
         private void rButtonMultipleFiles_CheckedChanged(object sender, EventArgs e)
@@ -193,7 +189,21 @@ namespace ThinkFTP
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
+            if (rButtonOneFIle.Checked == true)
+            {
+                UniFtpService FTPService = new UniFtpService(txtWindowsPath.Text, txtAddress.Text, txtUserName.Text, txtPassword.Text);
 
+                try
+                {
+                    FTPService.uploadFile(txtWindowsFile.Text, txtISFIle.Text);
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+                
+            }
         }
 
         private void fillFromInstance(Instance inst)
@@ -206,7 +216,38 @@ namespace ThinkFTP
             txtWindowsFile.Text = inst.WindowsFile;
         }
 
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            ClearTextBoxes(this);
+        }
+        private void ClearTextBoxes(Control control)
+        {
+            foreach (Control contr in control.Controls)
+            {
+                if (contr is TextBox)
+                {
+                    ((TextBox)contr).Clear();
+                    errorProv.SetError(((TextBox)contr),"");
+                }
 
+                if (contr is ListBox)
+                {
+                    ((ListBox)contr).Items.Clear();
+                }
+
+                if (contr.HasChildren)
+                {
+                    ClearTextBoxes(contr);
+                }
+
+
+                if (contr is CheckBox)
+                {
+
+                    ((CheckBox)contr).Checked = false;
+                }
+            }
+        }
 
 
 

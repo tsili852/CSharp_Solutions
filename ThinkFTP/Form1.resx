@@ -120,10 +120,9 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnUpload.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAGYktHRAD/AP8A/6C9p5MAAABkSURBVDhPY6A1SADieAiTdGALxL+gGMQmCUgD8XMg/g/FIDZI
-        jCjADsTHgRimGYZBYiA5gmAmEKNrhmGQHNEAXTPJYKQZgE0RsmZccnCATxE+OTjApggfwGkAqRgOsEkS
-        gRkYAINvV7BLzoETAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAGRJREFUOE9j
+        oDVIAOJ4CJN0YAvEv6AYxCYJSAPxcyD+D8UgNkiMKMAOxMeBGKYZhkFiIDmCYCYQo2uGYZAc0QBdM8lg
+        pBmATRGyZlxycIBPET45OMCmCB/AaQCpGA6wSRKBGRgAg29XsEvOgRMAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="errorProv.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
