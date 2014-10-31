@@ -12,7 +12,7 @@ using System.Data.Linq.Mapping;
 
 namespace ThinkFTP.HelpClasses
 {
-    enum instanceMode {SingleFile, MultipleFIles};
+    public enum instanceMode {SingleFile, MultipleFIles};
 
     [Table(Name="Instances")]
     public class Instance
@@ -43,7 +43,7 @@ namespace ThinkFTP.HelpClasses
         /// <param name="instanceID">Id of the instance as stored</param>
         public void getWithID(int instanceID)
         {
-            var connection = new SQLiteConnection(@"Data Source=C:\ThinkFTPDatabase");
+            var connection = new SQLiteConnection(@"Data Source=B:\ThinkFTPDatabase");
 
             using (var context = new DataContext(connection))
             {

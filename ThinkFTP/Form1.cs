@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections;
 
 using ThinkFTP.HelpClasses;
 
@@ -118,6 +119,34 @@ namespace ThinkFTP
 
             Instance inst = new Instance();
             inst.getWithID(1);
+            cmbInstances.Items.Add(inst.Name);
+
+            //string path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            //string appPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+
+            //MessageBox.Show(appPath);
+
+            //List<Instance> allInstances = HelpMe.getAllInstances();
+
+            //foreach (Instance instance in allInstances)
+            //{
+            //    cmbInstances.Items.Add(instance.Name);
+            //}
+
+            string dbPath = @"B:\ThinkFTPDatabase";
+
+            if (!File.Exists(dbPath))
+            {
+                var answer = MessageBox.Show(this,"The database file does not exist. It will be created.","Database File Error", MessageBoxButtons.OKCancel);
+                if (answer == System.Windows.Forms.DialogResult.Cancel)
+                {
+                    this.Dispose(true);
+                }
+                else
+                {
+                    HelpMe.createDatabase(dbPath);
+                }
+            }
         }
 
         private void rButtonMultipleFiles_CheckedChanged(object sender, EventArgs e)
