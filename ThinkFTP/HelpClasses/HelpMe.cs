@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,14 +19,13 @@ namespace ThinkFTP.HelpClasses
         {
             List<Instance> list = new List<Instance>();
 
-            var connection = new SQLiteConnection(@"Data Source=B:\ThinkFTPDatabase");
+            var connection = new SQLiteConnection(@"Data Source=C:\ThinkFTPDatabase");
 
             using (var context = new DataContext(connection))
             {
                 var data = from a in context.GetTable<Instance>()
                            select a;
-
-                foreach (Instance inst in data)
+                foreach (var inst in data)
                 {
                     list.Add(inst);
                 }
@@ -41,31 +41,31 @@ namespace ThinkFTP.HelpClasses
             dbConnection.Open();
 
             string sqlCreateInstances = @"CREATE TABLE [Instances] (
-                                        [id] int, 
-                                        [Name] varchar, 
-                                        [Address] varchar, 
-                                        [UserName] varchar, 
-                                        [Library] varchar, 
-                                        [iSeriesFile] varchar, 
-                                        [WindowsPath] varchar, 
-                                        [WindowsFile] varchar, 
-                                        [Mode] char, 
-                                            CONSTRAINT [] PRIMARY KEY ([id]));";
+                                        [id] INTEGER NOT NULL PRIMARY KEY, 
+                                        [Name] VARCHAR NOT NULL, 
+                                        [Address] VARCHAR, 
+                                        [UserName] VARCHAR, 
+                                        [Library] VARCHAR, 
+                                        [iSeriesFile] VARCHAR, 
+                                        [WindowsPath] VARCHAR, 
+                                        [WindowsFile] VARCHAR, 
+                                        [Mode] CHAR(1));";
 
-            string sqlCreateIndex = @"CREATE UNIQUE INDEX [id] ON [Instances] ([id] ASC);";
+            //string sqlCreateIndex = @"CREATE UNIQUE INDEX [id] ON [Instances] ([id] ASC);";
 
             using (TransactionScope tran = new TransactionScope())
             {
                 SQLiteCommand dbCommand = new SQLiteCommand(sqlCreateInstances, dbConnection);
                 dbCommand.ExecuteNonQuery();
 
-                dbCommand.CommandText = sqlCreateIndex;
-                dbCommand.ExecuteNonQuery();
+                //dbCommand.CommandText = sqlCreateIndex;
+                //dbCommand.ExecuteNonQuery();
 
                 tran.Complete();
             }
 
             dbConnection.Close();
         }
+
     }
 }

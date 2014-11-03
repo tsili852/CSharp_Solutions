@@ -117,27 +117,16 @@ namespace ThinkFTP
             rButtonOneFIle.Checked = true;
             panelButtons.Enabled = false;
 
-            Instance inst = new Instance();
-            inst.getWithID(1);
-            cmbInstances.Items.Add(inst.Name);
-
             //string path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
             //string appPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
 
             //MessageBox.Show(appPath);
 
-            //List<Instance> allInstances = HelpMe.getAllInstances();
-
-            //foreach (Instance instance in allInstances)
-            //{
-            //    cmbInstances.Items.Add(instance.Name);
-            //}
-
-            string dbPath = @"B:\ThinkFTPDatabase";
+            string dbPath = @"C:\ThinkFTPDatabase";
 
             if (!File.Exists(dbPath))
             {
-                var answer = MessageBox.Show(this,"The database file does not exist. It will be created.","Database File Error", MessageBoxButtons.OKCancel);
+                var answer = MessageBox.Show(this, "The database file does not exist. It will be created.", "Database File Error", MessageBoxButtons.OKCancel);
                 if (answer == System.Windows.Forms.DialogResult.Cancel)
                 {
                     this.Dispose(true);
@@ -147,6 +136,17 @@ namespace ThinkFTP
                     HelpMe.createDatabase(dbPath);
                 }
             }
+
+            cmbInstances.Items.Insert(0, "New");
+            
+            List<Instance> allInstances = HelpMe.getAllInstances();
+            foreach (Instance instance in allInstances)
+            {
+                cmbInstances.Items.Add(instance.id + ". " + instance.Name);
+            }
+
+            cmbInstances.SelectedIndex = 0;
+
         }
 
         private void rButtonMultipleFiles_CheckedChanged(object sender, EventArgs e)
@@ -279,12 +279,68 @@ namespace ThinkFTP
             }
         }
 
+        private void cmbInstances_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+            if (cmbInstances.SelectedIndex == 0)
+            {
+                ClearTextBoxes(this);
+                panelButtons.Enabled = false;
+                txtAddress.Focus();
+            }
+            else
+            {
+                Instance selectedInstance = new Instance();
 
+                int id = Convert.ToInt32(cmbInstances.SelectedItem.ToString().Substring(0, 1));
 
+                try
+                {
+                    selectedInstance.getWithID(id);
 
+                    ClearTextBoxes(this);
 
+                    txtAddress.Text = selectedInstance.Address;
+                    txtUserName.Text = selectedInstance.UserName;
+                    txtLibrary.Text = selectedInstance.Library;
+                    txtISFIle.Text = selectedInstance.iSeriesFile;
+                    txtWindowsFile.Text = selectedInstance.WindowsFile;
+                    txtWindowsPath.Text = selectedInstance.WindowsPath;
+                    if (selectedInstance.Mode == instanceMode.SingleFile)
+                    {
+                        rButtonOneFIle.Checked = true;
+                    }
+                    else
+                    {
+                        rButtonMultipleFiles.Checked = false;
+                    }
+                    panelButtons.Enabled = false; ;
+                    txtPassword.Focus();
 
+                }
+                catch (InstanceNotFoundException)
+                {
+                    MessageBox.Show("Selected Instance not found","!! Error ", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    cmbInstances.SelectedIndex = 0;
+                }
+            }
+        }
 
+        private void ClearAllErrors(Control control)
+        {
+            foreach (Control contr in control.Controls)
+            {
+                if (contr is TextBox)
+                {
+                    errorProv.SetError(((TextBox)contr), "");
+                }
+
+                if (contr.HasChildren)
+                {
+                    ClearTextBoxes(contr);
+                }
+            }
+        }
+              
     }
 }

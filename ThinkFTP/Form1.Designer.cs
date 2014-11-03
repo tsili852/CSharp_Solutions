@@ -33,6 +33,9 @@ namespace ThinkFTP
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.iseriesTabPage = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnClearAll = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnUpload = new System.Windows.Forms.Button();
@@ -40,7 +43,6 @@ namespace ThinkFTP
             this.label5 = new System.Windows.Forms.Label();
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.btnSelectFolder = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rButtonMultipleFiles = new System.Windows.Forms.RadioButton();
             this.rButtonOneFIle = new System.Windows.Forms.RadioButton();
@@ -49,6 +51,7 @@ namespace ThinkFTP
             this.lblISFile = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.serverGB = new System.Windows.Forms.GroupBox();
+            this.btnSaveInstance = new System.Windows.Forms.Button();
             this.cmbInstances = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -56,9 +59,6 @@ namespace ThinkFTP
             this.label1 = new System.Windows.Forms.Label();
             this.otherTabPage = new System.Windows.Forms.TabPage();
             this.errorProv = new System.Windows.Forms.ErrorProvider(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnClearAll = new System.Windows.Forms.Button();
-            this.btnSaveInstance = new System.Windows.Forms.Button();
             this.txtISFIle = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtLibrary = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtPassword = new ThinkFTP.HelpClasses.ValidatingTextBox();
@@ -68,11 +68,11 @@ namespace ThinkFTP
             this.txtWindowsFile = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.tabControl1.SuspendLayout();
             this.iseriesTabPage.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panelButtons.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.serverGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProv)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -84,7 +84,7 @@ namespace ThinkFTP
             this.tabControl1.Location = new System.Drawing.Point(3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(591, 350);
+            this.tabControl1.Size = new System.Drawing.Size(614, 350);
             this.tabControl1.TabIndex = 13;
             // 
             // iseriesTabPage
@@ -108,10 +108,42 @@ namespace ThinkFTP
             this.iseriesTabPage.Location = new System.Drawing.Point(4, 22);
             this.iseriesTabPage.Name = "iseriesTabPage";
             this.iseriesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.iseriesTabPage.Size = new System.Drawing.Size(583, 324);
+            this.iseriesTabPage.Size = new System.Drawing.Size(606, 324);
             this.iseriesTabPage.TabIndex = 0;
             this.iseriesTabPage.Text = "iSeries";
             this.iseriesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Honeydew;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnClearAll);
+            this.panel1.Controls.Add(this.btnExit);
+            this.panel1.Location = new System.Drawing.Point(336, 242);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(261, 53);
+            this.panel1.TabIndex = 18;
+            // 
+            // btnClearAll
+            // 
+            this.btnClearAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClearAll.Location = new System.Drawing.Point(12, 13);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(73, 25);
+            this.btnClearAll.TabIndex = 8;
+            this.btnClearAll.Text = "Clear All";
+            this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(170, 13);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(73, 25);
+            this.btnExit.TabIndex = 10;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // panelButtons
             // 
@@ -184,16 +216,6 @@ namespace ThinkFTP
             this.btnSelectFolder.TabStop = false;
             this.btnSelectFolder.UseVisualStyleBackColor = true;
             this.btnSelectFolder.Click += new System.EventHandler(this.btnSelectFolder_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Location = new System.Drawing.Point(170, 13);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(73, 25);
-            this.btnExit.TabIndex = 10;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // groupBox1
             // 
@@ -273,10 +295,20 @@ namespace ThinkFTP
             this.serverGB.Controls.Add(this.label1);
             this.serverGB.Location = new System.Drawing.Point(9, 6);
             this.serverGB.Name = "serverGB";
-            this.serverGB.Size = new System.Drawing.Size(568, 82);
+            this.serverGB.Size = new System.Drawing.Size(588, 82);
             this.serverGB.TabIndex = 0;
             this.serverGB.TabStop = false;
             this.serverGB.Text = "Server Information";
+            // 
+            // btnSaveInstance
+            // 
+            this.btnSaveInstance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaveInstance.Location = new System.Drawing.Point(520, 23);
+            this.btnSaveInstance.Name = "btnSaveInstance";
+            this.btnSaveInstance.Size = new System.Drawing.Size(61, 46);
+            this.btnSaveInstance.TabIndex = 9;
+            this.btnSaveInstance.Text = "Save Instance";
+            this.btnSaveInstance.UseVisualStyleBackColor = true;
             // 
             // cmbInstances
             // 
@@ -288,6 +320,7 @@ namespace ThinkFTP
             this.cmbInstances.Size = new System.Drawing.Size(155, 21);
             this.cmbInstances.TabIndex = 99;
             this.cmbInstances.TabStop = false;
+            this.cmbInstances.SelectedIndexChanged += new System.EventHandler(this.cmbInstances_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -326,7 +359,7 @@ namespace ThinkFTP
             this.otherTabPage.Location = new System.Drawing.Point(4, 22);
             this.otherTabPage.Name = "otherTabPage";
             this.otherTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.otherTabPage.Size = new System.Drawing.Size(583, 324);
+            this.otherTabPage.Size = new System.Drawing.Size(606, 324);
             this.otherTabPage.TabIndex = 1;
             this.otherTabPage.Text = "Other Server";
             this.otherTabPage.UseVisualStyleBackColor = true;
@@ -337,38 +370,6 @@ namespace ThinkFTP
             this.errorProv.ContainerControl = this;
             this.errorProv.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProv.Icon")));
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Honeydew;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btnClearAll);
-            this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Location = new System.Drawing.Point(302, 242);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(261, 53);
-            this.panel1.TabIndex = 18;
-            // 
-            // btnClearAll
-            // 
-            this.btnClearAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClearAll.Location = new System.Drawing.Point(12, 13);
-            this.btnClearAll.Name = "btnClearAll";
-            this.btnClearAll.Size = new System.Drawing.Size(73, 25);
-            this.btnClearAll.TabIndex = 8;
-            this.btnClearAll.Text = "Clear All";
-            this.btnClearAll.UseVisualStyleBackColor = true;
-            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
-            // 
-            // btnSaveInstance
-            // 
-            this.btnSaveInstance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveInstance.Location = new System.Drawing.Point(501, 23);
-            this.btnSaveInstance.Name = "btnSaveInstance";
-            this.btnSaveInstance.Size = new System.Drawing.Size(61, 46);
-            this.btnSaveInstance.TabIndex = 9;
-            this.btnSaveInstance.Text = "Save Instance";
-            this.btnSaveInstance.UseVisualStyleBackColor = true;
-            // 
             // txtISFIle
             // 
             this.txtISFIle.ControlToValidate = null;
@@ -376,6 +377,7 @@ namespace ThinkFTP
             this.txtISFIle.Name = "txtISFIle";
             this.txtISFIle.Size = new System.Drawing.Size(155, 20);
             this.txtISFIle.TabIndex = 4;
+            this.txtISFIle.TextChanged += new System.EventHandler(this.txtISFIle_Validated);
             this.txtISFIle.Validated += new System.EventHandler(this.txtISFIle_Validated);
             // 
             // txtLibrary
@@ -385,6 +387,7 @@ namespace ThinkFTP
             this.txtLibrary.Name = "txtLibrary";
             this.txtLibrary.Size = new System.Drawing.Size(155, 20);
             this.txtLibrary.TabIndex = 3;
+            this.txtLibrary.TextChanged += new System.EventHandler(this.txtLibrary_Validated);
             this.txtLibrary.Validated += new System.EventHandler(this.txtLibrary_Validated);
             // 
             // txtPassword
@@ -395,6 +398,7 @@ namespace ThinkFTP
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(155, 20);
             this.txtPassword.TabIndex = 2;
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_Validated);
             this.txtPassword.Validated += new System.EventHandler(this.txtPassword_Validated);
             // 
             // txtUserName
@@ -404,6 +408,7 @@ namespace ThinkFTP
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(155, 20);
             this.txtUserName.TabIndex = 1;
+            this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_Validated);
             this.txtUserName.Validated += new System.EventHandler(this.txtUserName_Validated);
             // 
             // txtAddress
@@ -413,6 +418,7 @@ namespace ThinkFTP
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(155, 20);
             this.txtAddress.TabIndex = 0;
+            this.txtAddress.TextChanged += new System.EventHandler(this.txtAddress_Validated);
             this.txtAddress.Validated += new System.EventHandler(this.txtAddress_Validated);
             // 
             // txtWindowsPath
@@ -439,25 +445,25 @@ namespace ThinkFTP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 357);
+            this.ClientSize = new System.Drawing.Size(619, 358);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(612, 396);
-            this.MinimumSize = new System.Drawing.Size(612, 396);
+            this.MaximumSize = new System.Drawing.Size(635, 396);
+            this.MinimumSize = new System.Drawing.Size(635, 396);
             this.Name = "frmMain";
             this.Text = "Think FTP";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tabControl1.ResumeLayout(false);
             this.iseriesTabPage.ResumeLayout(false);
             this.iseriesTabPage.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.panelButtons.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.serverGB.ResumeLayout(false);
             this.serverGB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProv)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="HelpClasses\HelpMe.cs" />
     <Compile Include="HelpClasses\Instance.cs" />
+    <Compile Include="HelpClasses\InstanceNotFoundException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HelpClasses\UniFTPService.cs" />
