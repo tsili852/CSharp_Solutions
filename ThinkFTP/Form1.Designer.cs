@@ -39,7 +39,6 @@ namespace ThinkFTP
             this.panelButtons = new System.Windows.Forms.Panel();
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnUpload = new System.Windows.Forms.Button();
-            this.listBoxTranFiles = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.btnSelectFolder = new System.Windows.Forms.Button();
@@ -59,6 +58,7 @@ namespace ThinkFTP
             this.label1 = new System.Windows.Forms.Label();
             this.otherTabPage = new System.Windows.Forms.TabPage();
             this.errorProv = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblStatus = new System.Windows.Forms.Label();
             this.txtISFIle = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtLibrary = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtPassword = new ThinkFTP.HelpClasses.ValidatingTextBox();
@@ -66,6 +66,9 @@ namespace ThinkFTP
             this.txtAddress = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtWindowsPath = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtWindowsFile = new ThinkFTP.HelpClasses.ValidatingTextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.operation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.file = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.iseriesTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -73,6 +76,7 @@ namespace ThinkFTP
             this.groupBox1.SuspendLayout();
             this.serverGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -84,15 +88,16 @@ namespace ThinkFTP
             this.tabControl1.Location = new System.Drawing.Point(3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(614, 350);
+            this.tabControl1.Size = new System.Drawing.Size(614, 329);
             this.tabControl1.TabIndex = 13;
             // 
             // iseriesTabPage
             // 
+            this.iseriesTabPage.Controls.Add(this.dataGridView1);
+            this.iseriesTabPage.Controls.Add(this.lblStatus);
             this.iseriesTabPage.Controls.Add(this.panel1);
             this.iseriesTabPage.Controls.Add(this.txtISFIle);
             this.iseriesTabPage.Controls.Add(this.txtLibrary);
-            this.iseriesTabPage.Controls.Add(this.listBoxTranFiles);
             this.iseriesTabPage.Controls.Add(this.label5);
             this.iseriesTabPage.Controls.Add(this.btnSelectFile);
             this.iseriesTabPage.Controls.Add(this.btnSelectFolder);
@@ -108,7 +113,7 @@ namespace ThinkFTP
             this.iseriesTabPage.Location = new System.Drawing.Point(4, 22);
             this.iseriesTabPage.Name = "iseriesTabPage";
             this.iseriesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.iseriesTabPage.Size = new System.Drawing.Size(606, 324);
+            this.iseriesTabPage.Size = new System.Drawing.Size(606, 303);
             this.iseriesTabPage.TabIndex = 0;
             this.iseriesTabPage.Text = "iSeries";
             this.iseriesTabPage.UseVisualStyleBackColor = true;
@@ -119,7 +124,7 @@ namespace ThinkFTP
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btnClearAll);
             this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Location = new System.Drawing.Point(336, 242);
+            this.panel1.Location = new System.Drawing.Point(336, 222);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(261, 53);
             this.panel1.TabIndex = 18;
@@ -151,7 +156,7 @@ namespace ThinkFTP
             this.panelButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelButtons.Controls.Add(this.btnDownload);
             this.panelButtons.Controls.Add(this.btnUpload);
-            this.panelButtons.Location = new System.Drawing.Point(18, 242);
+            this.panelButtons.Location = new System.Drawing.Point(18, 222);
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Size = new System.Drawing.Size(261, 53);
             this.panelButtons.TabIndex = 7;
@@ -166,6 +171,7 @@ namespace ThinkFTP
             this.btnDownload.TabIndex = 9;
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // btnUpload
             // 
@@ -179,21 +185,14 @@ namespace ThinkFTP
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
-            // listBoxTranFiles
-            // 
-            this.listBoxTranFiles.FormattingEnabled = true;
-            this.listBoxTranFiles.Location = new System.Drawing.Point(413, 116);
-            this.listBoxTranFiles.Name = "listBoxTranFiles";
-            this.listBoxTranFiles.Size = new System.Drawing.Size(141, 95);
-            this.listBoxTranFiles.TabIndex = 17;
-            // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(439, 96);
+            this.label5.Location = new System.Drawing.Point(449, 88);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 17);
+            this.label5.Size = new System.Drawing.Size(86, 25);
             this.label5.TabIndex = 16;
             this.label5.Text = "Transferred Files";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnSelectFile
             // 
@@ -309,6 +308,7 @@ namespace ThinkFTP
             this.btnSaveInstance.TabIndex = 9;
             this.btnSaveInstance.Text = "Save Instance";
             this.btnSaveInstance.UseVisualStyleBackColor = true;
+            this.btnSaveInstance.Click += new System.EventHandler(this.btnSaveInstance_Click);
             // 
             // cmbInstances
             // 
@@ -369,6 +369,14 @@ namespace ThinkFTP
             this.errorProv.BlinkRate = 200;
             this.errorProv.ContainerControl = this;
             this.errorProv.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProv.Icon")));
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Location = new System.Drawing.Point(15, 278);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(582, 15);
+            this.lblStatus.TabIndex = 19;
+            this.lblStatus.Text = "Status";
             // 
             // txtISFIle
             // 
@@ -441,16 +449,49 @@ namespace ThinkFTP
             this.txtWindowsFile.TextChanged += new System.EventHandler(this.txtWindowsFile_Validated);
             this.txtWindowsFile.Validated += new System.EventHandler(this.txtWindowsFile_Validated);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.operation,
+            this.file});
+            this.dataGridView1.Location = new System.Drawing.Point(416, 116);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(174, 89);
+            this.dataGridView1.TabIndex = 20;
+            // 
+            // operation
+            // 
+            this.operation.HeaderText = "Operation";
+            this.operation.Name = "operation";
+            this.operation.ReadOnly = true;
+            // 
+            // file
+            // 
+            this.file.HeaderText = "File";
+            this.file.Name = "file";
+            this.file.ReadOnly = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 358);
+            this.ClientSize = new System.Drawing.Size(619, 332);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(635, 396);
-            this.MinimumSize = new System.Drawing.Size(635, 396);
+            this.MaximumSize = new System.Drawing.Size(635, 370);
+            this.MinimumSize = new System.Drawing.Size(635, 370);
             this.Name = "frmMain";
             this.Text = "Think FTP";
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -464,6 +505,7 @@ namespace ThinkFTP
             this.serverGB.ResumeLayout(false);
             this.serverGB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -492,7 +534,6 @@ namespace ThinkFTP
         private System.Windows.Forms.Button btnSelectFolder;
         private System.Windows.Forms.Button btnSelectFile;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListBox listBoxTranFiles;
         private ValidatingTextBox txtAddress;
         private ValidatingTextBox txtUserName;
         private ValidatingTextBox txtPassword;
@@ -505,6 +546,10 @@ namespace ThinkFTP
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSaveInstance;
         private System.Windows.Forms.Button btnClearAll;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn operation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn file;
     }
 }
 

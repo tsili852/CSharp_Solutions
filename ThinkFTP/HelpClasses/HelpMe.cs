@@ -33,6 +33,48 @@ namespace ThinkFTP.HelpClasses
             }
         }
 
+        public static int getMaxID() 
+        {
+            var connection = new SQLiteConnection(@"Data Source=C:\ThinkFTPDatabase");
+
+            using (var context = new DataContext(connection))
+            {
+                int maxID = (from a in context.GetTable<Instance>()
+                             select a.id).Max();
+
+                return maxID;
+            }
+        }
+
+        public static void modifyInstance(Instance toBeModified)
+        {
+            using (var context = new InstanceContext())
+            {
+                var selectedInstance =
+                    (from a in context.Instance
+                     where a.id == toBeModified.id
+                     select a).SingleOrDefault();
+
+                selectedInstance.Address = toBeModified.Address;
+                selectedInstance.iSeriesFile = toBeModified.iSeriesFile;
+                selectedInstance.Library = toBeModified.Library;
+                selectedInstance.Mode = toBeModified.Mode;
+                selectedInstance.UserName = toBeModified.UserName;
+                selectedInstance.WindowsFile = toBeModified.WindowsFile;
+                selectedInstance.WindowsPath = toBeModified.WindowsPath;
+
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+
         public static void createDatabase(string dbPath)
         {
             SQLiteConnection.CreateFile(dbPath);

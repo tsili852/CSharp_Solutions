@@ -14,7 +14,7 @@ namespace ThinkFTP.HelpClasses
 {
     public enum instanceMode {SingleFile, MultipleFIles};
 
-    [Table(Name="Instances")]
+    [Table(Name="Instance")]
     public class Instance
     {
         private int _id;
@@ -25,7 +25,6 @@ namespace ThinkFTP.HelpClasses
         private string _400File;
         private string _windowsPath;
         private string _windowsFile;
-        [Column(Name = "Mode")]
         private char _mode;
 
         [Column(Name="id")]
@@ -124,36 +123,22 @@ namespace ThinkFTP.HelpClasses
                 _windowsFile = value;
             }
         }
-        public instanceMode Mode
+        [Column(Name = "Mode")]
+        public char Mode
         {
             get
             {
-                if (_mode == 'S')
-                {
-                    return instanceMode.SingleFile;
-                }
-                else
-                {
-                    return instanceMode.MultipleFIles;
-                }
+                return _mode;
             }
             set
             {
-                if (value == instanceMode.SingleFile)
-                {
-                    _mode = 'S';
-                }
-                else
-                {
-                    _mode = 'M';
-                }
+                _mode = value;
             }
         }
 
         /// <summary>
-        /// Fill the instance from a spicific XML Document
+        /// Fill the instance from the database
         /// </summary>
-        /// <param name="XMLDocument">XML Document path/name</param>
         /// <param name="instanceID">Id of the instance as stored</param>
         /// <exception cref="InstanceNotFoundException">Thrown when the selected instance was not found</exception>
         public void getWithID(int instanceID)
@@ -184,6 +169,16 @@ namespace ThinkFTP.HelpClasses
                     throw new InstanceNotFoundException("Selected instance not found in database");
                 }
             }
+        }
+
+        /// <summary>
+        /// Save the instance to the database 
+        /// </summary>
+        /// <param name="instanceID">Id of the instance as stored</param>
+        /// <exception cref="InstanceNotFoundException">Thrown when the selected instance was not found</exception>
+        public int saveToDB(Instance toBeSaved)
+        {
+            return 1;
         }
     }
 }
