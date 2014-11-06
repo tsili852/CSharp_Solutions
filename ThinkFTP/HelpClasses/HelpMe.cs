@@ -9,17 +9,28 @@ using System.Data.SQLite.Linq;
 using System.Data.SQLite;
 using System.Data.Linq;
 using System.Transactions;
+using ThinkFTP;
 
 
 namespace ThinkFTP.HelpClasses
 {
-    static class HelpMe
+    static class MyTools
     {
+        public static string dbPathWithoutFile;
+        public static string dbPathWithFile;
+
+        public static void fillSettings()
+        {
+            dbPathWithoutFile = ThinkFTP.Properties.Settings.Default.ApplicationPath;
+            dbPathWithFile = dbPathWithoutFile + ThinkFTP.Properties.Settings.Default.DBName;
+        }
+
         public static List<Instance> getAllInstances()
         {
             List<Instance> list = new List<Instance>();
 
-            var connection = new SQLiteConnection(@"Data Source=C:\ThinkFTPDatabase");
+            //var connection = new SQLiteConnection(@"Data Source=C:\ThinkFTPDatabase");
+            var connection = new SQLiteConnection(@"Data Source=" + dbPathWithFile);
 
             using (var context = new DataContext(connection))
             {
@@ -35,7 +46,7 @@ namespace ThinkFTP.HelpClasses
 
         public static int getMaxID() 
         {
-            var connection = new SQLiteConnection(@"Data Source=C:\ThinkFTPDatabase");
+            var connection = new SQLiteConnection(@"Data Source=" + dbPathWithFile);
 
             using (var context = new DataContext(connection))
             {
@@ -75,11 +86,16 @@ namespace ThinkFTP.HelpClasses
             }
         }
 
-        public static void createDatabase(string dbPath)
+        public static int saveNewInstance(Instance toBeSaved)
         {
-            SQLiteConnection.CreateFile(dbPath);
+            return 1;
+        }
 
-            SQLiteConnection dbConnection = new SQLiteConnection(@"Data Source=" + dbPath);
+        public static void createDatabase()
+        {
+            SQLiteConnection.CreateFile(dbPathWithFile);
+
+            SQLiteConnection dbConnection = new SQLiteConnection(@"Data Source=" + dbPathWithFile);
             dbConnection.Open();
 
             string sqlCreateInstances = @"CREATE TABLE [Instances] (

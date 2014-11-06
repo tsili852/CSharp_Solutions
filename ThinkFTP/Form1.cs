@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections;
+using System.Reflection;
 using Microsoft.VisualBasic;
 using ThinkFTP.HelpClasses;
 
@@ -16,13 +17,18 @@ namespace ThinkFTP
 {
     public partial class frmMain : Form
     {
+
+
         public frmMain()
         {
+            MyTools.fillSettings();
             InitializeComponent();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            Text = "ThinkFTP -- v." +  typeof(Program).Assembly.GetName().Version;
+
             lblStatus.Text = "";
             rButtonOneFIle.Checked = true;
             panelButtons.Enabled = false;
@@ -32,9 +38,17 @@ namespace ThinkFTP
 
             //MessageBox.Show(appPath);
 
-            string dbPath = @"C:\ThinkFTPDatabase";
+            //string dbPathWithoutFile = @"C:\ProgramData\Unisystems\ThinkFTP";
 
-            if (!File.Exists(dbPath))
+
+
+            bool exists = System.IO.Directory.Exists(MyTools.dbPathWithoutFile);
+
+            if (!exists) {
+                System.IO.Directory.CreateDirectory(MyTools.dbPathWithoutFile);
+            }
+
+            if (!File.Exists(MyTools.dbPathWithFile))
             {
                 var answer = MessageBox.Show(this, "The database file does not exist. It will be created.", "Database File Error", MessageBoxButtons.OKCancel);
                 if (answer == System.Windows.Forms.DialogResult.Cancel)
@@ -43,13 +57,13 @@ namespace ThinkFTP
                 }
                 else
                 {
-                    HelpMe.createDatabase(dbPath);
+                    MyTools.createDatabase();
                 }
             }
 
             cmbInstances.Items.Insert(0, "New");
 
-            List<Instance> allInstances = HelpMe.getAllInstances();
+            List<Instance> allInstances = MyTools.getAllInstances();
             foreach (Instance instance in allInstances)
             {
                 cmbInstances.Items.Add(instance.id + ". " + instance.Name);
@@ -57,12 +71,11 @@ namespace ThinkFTP
 
             cmbInstances.SelectedIndex = 0;
 
+            showAboutInformation();
+
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Dispose(true);
-        }
+        #region TextBoxes Validation
 
         private void txtAddress_Validated(object sender, EventArgs e)
         {
@@ -150,25 +163,45 @@ namespace ThinkFTP
             }
         }
 
+        private void txtISFIle_TextChanged(object sender, EventArgs e)
+        {
+            txtWindowsFile.Text = txtISFIle.Text;
+        }
+        #endregion
 
+        #region Button Events
 
         private void rButtonMultipleFiles_CheckedChanged(object sender, EventArgs e)
         {
+            //if (rButtonMultipleFiles.Checked == true)
+            //{
+            //    txtISFIle.Enabled = false;
+            //    txtISFIle.Text = "";
+            //    errorProv.SetError(txtISFIle, null);
+            //    txtWindowsFile.Enabled = false;
+            //    txtWindowsFile.Text = "";
+
+            //    lblISFile.Enabled = false;
+            //    lblWindowsPath.Enabled = false;
+
+            //    btnSelectFile.Enabled = false;
+            //}
             if (rButtonMultipleFiles.Checked == true)
             {
-                txtISFIle.Enabled = false; 
-                txtISFIle.Text = "";
-                errorProv.SetError(txtISFIle, null);
-                txtWindowsFile.Enabled = false;
-                txtWindowsFile.Text = "";
-
-                lblISFile.Enabled = false;
-                lblWindowsPath.Enabled = false;
-
-                btnSelectFile.Enabled = false;
-
-                
+                rButtonMultipleFiles.Checked = false;
+                rButtonOneFIle.Checked = true;
             }
+            MFilesToolTip.Show("Under Construction", rButtonMultipleFiles);
+        }
+
+        private void rButtonMultipleFiles_MouseHover(object sender, EventArgs e)
+        {
+            MFilesToolTip.Show("Under Construction", rButtonMultipleFiles);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Dispose(true);
         }
 
         private void rButtonOneFIle_CheckedChanged(object sender, EventArgs e)
@@ -195,7 +228,12 @@ namespace ThinkFTP
                 txtWindowsPath.Text = fldBrowser.SelectedPath;
                 //txtWindowsFile.Text = "";
             }
-            
+
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            ClearTextBoxes(this);
         }
 
         private void btnSelectFile_Click(object sender, EventArgs e)
@@ -214,17 +252,7 @@ namespace ThinkFTP
 
             }
         }
-
-        private void txtISFIle_TextChanged(object sender, EventArgs e)
-        {
-            txtWindowsFile.Text = txtISFIle.Text;
-        }
-
-        private void btnClearAll_Click(object sender, EventArgs e)
-        {
-            ClearTextBoxes(this);
-        }
-
+        
         private void cmbInstances_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -362,7 +390,9 @@ namespace ThinkFTP
             if (cmbInstances.SelectedItem.ToString().Trim() == "New")
             {
                 string newName = Microsoft.VisualBasic.Interaction.InputBox("Give your instance a name :", "New Instance", "");
-                Instance toBeSaved = fillInstanceFromForm(HelpMe.getMaxID(), newName);
+                Instance toBeSaved = fillInstanceFromForm(MyTools.getMaxID(), newName);
+
+                int newID = MyTools.saveNewInstance(toBeSaved);
             }
             else
             {
@@ -373,7 +403,7 @@ namespace ThinkFTP
 
                 try
                 {
-                    HelpMe.modifyInstance(toBeModified);
+                    MyTools.modifyInstance(toBeModified);
 
                     lblStatus.Text = "Instance " 
                         + cmbInstances.SelectedItem.ToString().Trim().Substring(2, cmbInstances.SelectedItem.ToString().Trim().Length -2 )
@@ -389,6 +419,9 @@ namespace ThinkFTP
             }
 
         }
+        #endregion
+
+        #region Help Methods
 
         private void fillFromInstance(Instance inst)
         {
@@ -470,5 +503,96 @@ namespace ThinkFTP
                 }
             }
         }
+
+        private void showAboutInformation()
+        {
+            labelProductName.Text = AssemblyProduct;
+            labelVersion.Text = AssemblyVersion;
+            labelCopyright.Text = AssemblyCopyright;
+            labelCompanyName.Text = AssemblyCompany;
+            textBoxDescription.Text = AssemblyDescription;
+        }
+        #endregion
+
+        #region Assembly Attribute Accessors
+
+        public string AssemblyTitle
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+                if (attributes.Length > 0)
+                {
+                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                    if (titleAttribute.Title != "")
+                    {
+                        return titleAttribute.Title;
+                    }
+                }
+                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+            }
+        }
+
+        public string AssemblyVersion
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
+
+        public string AssemblyDescription
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return "";
+                }
+                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
+            }
+        }
+
+        public string AssemblyProduct
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return "";
+                }
+                return ((AssemblyProductAttribute)attributes[0]).Product;
+            }
+        }
+
+        public string AssemblyCopyright
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return "";
+                }
+                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+            }
+        }
+
+        public string AssemblyCompany
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return "";
+                }
+                return ((AssemblyCompanyAttribute)attributes[0]).Company;
+            }
+        }
+        #endregion
+
     }
 }

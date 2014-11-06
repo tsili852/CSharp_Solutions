@@ -63,6 +63,16 @@ namespace ThinkFTP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Construction_Tape {
+            get {
+                object obj = ResourceManager.GetObject("Construction-Tape", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap download16 {
             get {
                 object obj = ResourceManager.GetObject("download16", resourceCulture);
@@ -109,6 +119,16 @@ namespace ThinkFTP.Properties {
         internal static System.Drawing.Bitmap selectFolder16 {
             get {
                 object obj = ResourceManager.GetObject("selectFolder16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UniLogo {
+            get {
+                object obj = ResourceManager.GetObject("UniLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
