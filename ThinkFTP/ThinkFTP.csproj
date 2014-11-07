@@ -105,7 +105,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelpClasses\HelpMe.cs" />
+    <Compile Include="HelpClasses\MyTools.cs" />
     <Compile Include="HelpClasses\Instance.cs" />
     <Compile Include="HelpClasses\InstanceNotFoundException.cs" />
     <Compile Include="InstanceContext.cs" />

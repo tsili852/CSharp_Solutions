@@ -8,6 +8,7 @@ using System.Data.SQLite;
 using System.Data.Entity;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using ThinkFTP.HelpClasses;
 
 
 namespace ThinkFTP.HelpClasses
@@ -17,6 +18,20 @@ namespace ThinkFTP.HelpClasses
     [Table(Name="Instance")]
     public class Instance
     {
+
+        public Instance()
+        {
+
+        }
+
+        /// <param name="add">Server Address</param>
+        /// <param name="uName">User Name</param>
+        public Instance(string add, string uName)
+        {
+            Address = add;
+            UserName = uName;
+        }
+
         private int _id;
         private string _name;
         private string _address;
@@ -27,7 +42,7 @@ namespace ThinkFTP.HelpClasses
         private string _windowsFile;
         private char _mode;
 
-        [Column(Name="id")]
+        [Column(Name="id",IsPrimaryKey=true)]
         public int id
         { 
             get 
@@ -141,9 +156,9 @@ namespace ThinkFTP.HelpClasses
         /// </summary>
         /// <param name="instanceID">Id of the instance as stored</param>
         /// <exception cref="InstanceNotFoundException">Thrown when the selected instance was not found</exception>
-        public void getWithID(int instanceID)
+        public void fillWithID(int instanceID)
         {
-            var connection = new SQLiteConnection(@"Data Source=C:\ThinkFTPDatabase");
+            var connection = new SQLiteConnection(@"Data Source=" + MyTools.dbPathWithFile);
 
             using (var context = new DataContext(connection))
             {
@@ -169,16 +184,6 @@ namespace ThinkFTP.HelpClasses
                     throw new InstanceNotFoundException("Selected instance not found in database");
                 }
             }
-        }
-
-        /// <summary>
-        /// Save the instance to the database 
-        /// </summary>
-        /// <param name="instanceID">Id of the instance as stored</param>
-        /// <exception cref="InstanceNotFoundException">Thrown when the selected instance was not found</exception>
-        public int saveToDB(Instance toBeSaved)
-        {
-            return 1;
         }
     }
 }

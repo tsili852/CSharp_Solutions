@@ -27,20 +27,11 @@ namespace ThinkFTP
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            Text = "ThinkFTP -- v." +  typeof(Program).Assembly.GetName().Version;
+            Text = "ThinkFTP -- Unisystems S.A.";
 
             lblStatus.Text = "";
             rButtonOneFIle.Checked = true;
             panelButtons.Enabled = false;
-
-            //string path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-            //string appPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
-
-            //MessageBox.Show(appPath);
-
-            //string dbPathWithoutFile = @"C:\ProgramData\Unisystems\ThinkFTP";
-
-
 
             bool exists = System.IO.Directory.Exists(MyTools.dbPathWithoutFile);
 
@@ -61,13 +52,16 @@ namespace ThinkFTP
                 }
             }
 
-            cmbInstances.Items.Insert(0, "New");
-
             List<Instance> allInstances = MyTools.getAllInstances();
             foreach (Instance instance in allInstances)
             {
                 cmbInstances.Items.Add(instance.id + ". " + instance.Name);
             }
+
+            //if (allInstances.Count == 0)
+            //{
+            //    cmbInstances.Items.Add("0. New");
+            //}
 
             cmbInstances.SelectedIndex = 0;
 
@@ -173,19 +167,21 @@ namespace ThinkFTP
 
         private void rButtonMultipleFiles_CheckedChanged(object sender, EventArgs e)
         {
-            //if (rButtonMultipleFiles.Checked == true)
-            //{
-            //    txtISFIle.Enabled = false;
-            //    txtISFIle.Text = "";
-            //    errorProv.SetError(txtISFIle, null);
-            //    txtWindowsFile.Enabled = false;
-            //    txtWindowsFile.Text = "";
+            /* !!!!!! To be implemented
+            if (rButtonMultipleFiles.Checked == true)
+            {
+                txtISFIle.Enabled = false;
+                txtISFIle.Text = "";
+                errorProv.SetError(txtISFIle, null);
+                txtWindowsFile.Enabled = false;
+                txtWindowsFile.Text = "";
 
-            //    lblISFile.Enabled = false;
-            //    lblWindowsPath.Enabled = false;
+                lblISFile.Enabled = false;
+                lblWindowsPath.Enabled = false;
 
-            //    btnSelectFile.Enabled = false;
-            //}
+                btnSelectFile.Enabled = false;
+            }
+            */
             if (rButtonMultipleFiles.Checked == true)
             {
                 rButtonMultipleFiles.Checked = false;
@@ -226,7 +222,6 @@ namespace ThinkFTP
             if (folderResult == DialogResult.OK)
             {
                 txtWindowsPath.Text = fldBrowser.SelectedPath;
-                //txtWindowsFile.Text = "";
             }
 
         }
@@ -242,7 +237,6 @@ namespace ThinkFTP
             openFile.CheckFileExists = true;
             openFile.CheckPathExists = true;
             openFile.InitialDirectory = txtWindowsPath.Text;
-            //openFile.Filter = "*.exe";
             DialogResult fileResult = openFile.ShowDialog();
 
             if (fileResult == DialogResult.OK)
@@ -256,52 +250,48 @@ namespace ThinkFTP
         private void cmbInstances_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (cmbInstances.SelectedIndex == 0)
+            Instance selectedInstance = new Instance();
+
+            int id = Convert.ToInt32(cmbInstances.SelectedItem.ToString().Substring(0, 1));
+
+            try
             {
+                selectedInstance.fillWithID(id);
+
                 ClearTextBoxes(this);
-                panelButtons.Enabled = false;
-                txtAddress.Focus();
+
+                txtAddress.Text = selectedInstance.Address;
+                txtUserName.Text = selectedInstance.UserName;
+                txtLibrary.Text = selectedInstance.Library;
+                txtISFIle.Text = selectedInstance.iSeriesFile;
+                txtWindowsFile.Text = selectedInstance.WindowsFile;
+                txtWindowsPath.Text = selectedInstance.WindowsPath;
+                if (selectedInstance.Mode == 'S')
+                {
+                    rButtonOneFIle.Checked = true;
+                }
+                else
+                {
+                    rButtonMultipleFiles.Checked = false;
+                }
+                panelButtons.Enabled = false; ;
+                txtPassword.Focus();
+
             }
-            else
+            catch (InstanceNotFoundException)
             {
-                Instance selectedInstance = new Instance();
-
-                int id = Convert.ToInt32(cmbInstances.SelectedItem.ToString().Substring(0, 1));
-
-                try
-                {
-                    selectedInstance.getWithID(id);
-
-                    ClearTextBoxes(this);
-
-                    txtAddress.Text = selectedInstance.Address;
-                    txtUserName.Text = selectedInstance.UserName;
-                    txtLibrary.Text = selectedInstance.Library;
-                    txtISFIle.Text = selectedInstance.iSeriesFile;
-                    txtWindowsFile.Text = selectedInstance.WindowsFile;
-                    txtWindowsPath.Text = selectedInstance.WindowsPath;
-                    if (selectedInstance.Mode == 'S')
-                    {
-                        rButtonOneFIle.Checked = true;
-                    }
-                    else
-                    {
-                        rButtonMultipleFiles.Checked = false;
-                    }
-                    panelButtons.Enabled = false; ;
-                    txtPassword.Focus();
-
-                }
-                catch (InstanceNotFoundException)
-                {
-                    MessageBox.Show("Selected Instance not found","!! Error ", MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    cmbInstances.SelectedIndex = 0;
-                }
-            }
+                MessageBox.Show("Selected Instance not found","!! Error ", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                cmbInstances.SelectedIndex = 0;
+            }            
         }
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
+            if (txtPassword.Text.Trim().Length == 0)
+            {
+                MessageBox.Show(this, "Fill in your password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             lblStatus.Text = "Uploading.....";
             lblStatus.BackColor = Color.LightSteelBlue;
 
@@ -336,8 +326,7 @@ namespace ThinkFTP
                 catch (Exception ex)
                 {
                     lblStatus.BackColor = Color.LightCoral;
-                    lblStatus.Text = "Error on upload: " + ex.Message;
-                    //MessageBox.Show(this, "Message : " + ex.Message, " !! Error on upload !! ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblStatus.Text = "Error on upload: " + ex.Message;                    
                 }
 
             }
@@ -345,6 +334,12 @@ namespace ThinkFTP
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
+            if (txtPassword.Text.Trim().Length == 0)
+            {
+                MessageBox.Show(this, "Fill in your password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             lblStatus.Text = "Downloading.....";
             lblStatus.BackColor = Color.LightSteelBlue;
             
@@ -379,7 +374,6 @@ namespace ThinkFTP
                 {
                     lblStatus.BackColor = Color.LightCoral;
                     lblStatus.Text = "Error on download: " + ex.Message;
-                    //MessageBox.Show(this, "Message : " + ex.Message, " !! Error on download !! ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             } 
@@ -387,37 +381,101 @@ namespace ThinkFTP
 
         private void btnSaveInstance_Click(object sender, EventArgs e)
         {
-            if (cmbInstances.SelectedItem.ToString().Trim() == "New")
-            {
-                string newName = Microsoft.VisualBasic.Interaction.InputBox("Give your instance a name :", "New Instance", "");
-                Instance toBeSaved = fillInstanceFromForm(MyTools.getMaxID(), newName);
+            btnSaveNewInstance.Enabled = false;
 
+            string newName;
+                
+            newName = Microsoft.VisualBasic.Interaction.InputBox("Give your instance a name :", "New Instance", "");
+
+            if (newName.Trim().Length == 0)
+            {
+                MessageBox.Show(this, "You have not specified a name. \nOperation aborted", "Operation Aborted",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            
+            Instance toBeSaved = fillInstanceFromForm(MyTools.getNewID(), newName);
+
+            try
+            {
                 int newID = MyTools.saveNewInstance(toBeSaved);
+
+                lblStatus.Text = "Instance " + newName + " saved with ID : " + newID;
+                lblStatus.BackColor = Color.PaleGreen;                    
+
+                Instance newInstance = new Instance();
+                newInstance.fillWithID(newID);
+
+                cmbInstances.Items.Add(newInstance.id + ". " + newInstance.Name);
+
+                btnSaveNewInstance.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                lblStatus.BackColor = Color.LightCoral;
+                lblStatus.Text = "Error on saving new instance: " + ex.Message + ex.InnerException;
+            }
+        }
+
+        private void btnSaveChanges_Click(object sender, EventArgs e)
+        {
+            btnSaveChanges.Enabled = false;
+
+            string instName = cmbInstances.SelectedItem.ToString().Trim();
+            int id = Convert.ToInt32(instName.Substring(0, 1));
+
+            Instance toBeModified = fillInstanceFromForm(id, "");
+
+            try
+            {
+                MyTools.modifyInstance(toBeModified);
+
+                lblStatus.Text = "Instance "
+                    + cmbInstances.SelectedItem.ToString().Trim().Substring(2, cmbInstances.SelectedItem.ToString().Trim().Length - 2)
+                    + " modified !!";
+                lblStatus.BackColor = Color.PaleGreen;
+            }
+            catch (Exception ex)
+            {
+                lblStatus.BackColor = Color.LightCoral;
+                lblStatus.Text = "Error on updating instance: " + ex.Message + ex.InnerException;
+            }
+
+            btnSaveChanges.Enabled = true;
+        }
+
+        private void btnDeleteInstance_Click(object sender, EventArgs e)
+        {
+            btnDeleteInstance.Enabled = false;
+
+            string instName = cmbInstances.SelectedItem.ToString().Trim();
+            int id = Convert.ToInt32(instName.Substring(0, 1));
+
+            if (id == 1)
+            {
+                MessageBox.Show(this, "Cannot delete the default instance", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                string instName = cmbInstances.SelectedItem.ToString().Trim();
-                int id = Convert.ToInt32(instName.Substring(0, 1));
-
-                Instance toBeModified = fillInstanceFromForm(id, "");
-
                 try
                 {
-                    MyTools.modifyInstance(toBeModified);
+                    Instance toBeDeleted = new Instance();
+                    toBeDeleted.fillWithID(id);
 
-                    lblStatus.Text = "Instance " 
-                        + cmbInstances.SelectedItem.ToString().Trim().Substring(2, cmbInstances.SelectedItem.ToString().Trim().Length -2 )
-                        + " modified !!";
+                    MyTools.deleteInstance(toBeDeleted);
+
+                    lblStatus.Text = "Instance "
+                        + cmbInstances.SelectedItem.ToString().Trim().Substring(2, cmbInstances.SelectedItem.ToString().Trim().Length - 2)
+                        + " deleted !!";
                     lblStatus.BackColor = Color.PaleGreen;
                 }
                 catch (Exception ex)
                 {
                     lblStatus.BackColor = Color.LightCoral;
-                    lblStatus.Text = "Error on saving new instance: " + ex.Message + ex.InnerException;
+                    lblStatus.Text = "Error on updating instance: " + ex.Message + ex.InnerException;
                 }
-                
-            }
 
+            }
         }
         #endregion
 
@@ -593,6 +651,7 @@ namespace ThinkFTP
             }
         }
         #endregion
+
 
     }
 }

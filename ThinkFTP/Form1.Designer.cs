@@ -54,9 +54,6 @@ namespace ThinkFTP
             this.lblISFile = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.serverGB = new System.Windows.Forms.GroupBox();
-            this.btnSaveInstance = new System.Windows.Forms.Button();
-            this.cmbInstances = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -77,6 +74,11 @@ namespace ThinkFTP
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.errorProv = new System.Windows.Forms.ErrorProvider(this.components);
             this.MFilesToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnDeleteInstance = new System.Windows.Forms.Button();
+            this.btnSaveChanges = new System.Windows.Forms.Button();
+            this.btnSaveNewInstance = new System.Windows.Forms.Button();
+            this.cmbInstances = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.txtISFIle = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtLibrary = new ThinkFTP.HelpClasses.ValidatingTextBox();
             this.txtPassword = new ThinkFTP.HelpClasses.ValidatingTextBox();
@@ -109,11 +111,16 @@ namespace ThinkFTP
             this.mainTabControl.Multiline = true;
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
-            this.mainTabControl.Size = new System.Drawing.Size(614, 329);
+            this.mainTabControl.Size = new System.Drawing.Size(603, 343);
             this.mainTabControl.TabIndex = 13;
             // 
             // iseriesTabPage
             // 
+            this.iseriesTabPage.Controls.Add(this.btnDeleteInstance);
+            this.iseriesTabPage.Controls.Add(this.btnSaveChanges);
+            this.iseriesTabPage.Controls.Add(this.btnSaveNewInstance);
+            this.iseriesTabPage.Controls.Add(this.cmbInstances);
+            this.iseriesTabPage.Controls.Add(this.label6);
             this.iseriesTabPage.Controls.Add(this.dataGridView1);
             this.iseriesTabPage.Controls.Add(this.lblStatus);
             this.iseriesTabPage.Controls.Add(this.panel1);
@@ -134,7 +141,7 @@ namespace ThinkFTP
             this.iseriesTabPage.Location = new System.Drawing.Point(4, 22);
             this.iseriesTabPage.Name = "iseriesTabPage";
             this.iseriesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.iseriesTabPage.Size = new System.Drawing.Size(606, 303);
+            this.iseriesTabPage.Size = new System.Drawing.Size(595, 317);
             this.iseriesTabPage.TabIndex = 0;
             this.iseriesTabPage.Text = "iSeries";
             this.iseriesTabPage.UseVisualStyleBackColor = true;
@@ -153,11 +160,11 @@ namespace ThinkFTP
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.operation,
             this.file});
-            this.dataGridView1.Location = new System.Drawing.Point(416, 116);
+            this.dataGridView1.Location = new System.Drawing.Point(423, 135);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(174, 89);
+            this.dataGridView1.Size = new System.Drawing.Size(162, 89);
             this.dataGridView1.TabIndex = 20;
             // 
             // operation
@@ -174,7 +181,7 @@ namespace ThinkFTP
             // 
             // lblStatus
             // 
-            this.lblStatus.Location = new System.Drawing.Point(15, 278);
+            this.lblStatus.Location = new System.Drawing.Point(15, 296);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(582, 15);
             this.lblStatus.TabIndex = 19;
@@ -186,7 +193,7 @@ namespace ThinkFTP
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btnClearAll);
             this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Location = new System.Drawing.Point(336, 222);
+            this.panel1.Location = new System.Drawing.Point(324, 240);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(261, 53);
             this.panel1.TabIndex = 18;
@@ -194,7 +201,7 @@ namespace ThinkFTP
             // btnClearAll
             // 
             this.btnClearAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClearAll.Location = new System.Drawing.Point(12, 13);
+            this.btnClearAll.Location = new System.Drawing.Point(11, 13);
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(73, 25);
             this.btnClearAll.TabIndex = 8;
@@ -218,7 +225,7 @@ namespace ThinkFTP
             this.panelButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelButtons.Controls.Add(this.btnDownload);
             this.panelButtons.Controls.Add(this.btnUpload);
-            this.panelButtons.Location = new System.Drawing.Point(18, 222);
+            this.panelButtons.Location = new System.Drawing.Point(18, 240);
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Size = new System.Drawing.Size(261, 53);
             this.panelButtons.TabIndex = 7;
@@ -249,7 +256,7 @@ namespace ThinkFTP
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(449, 88);
+            this.label5.Location = new System.Drawing.Point(458, 107);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 25);
             this.label5.TabIndex = 16;
@@ -259,7 +266,7 @@ namespace ThinkFTP
             // btnSelectFile
             // 
             this.btnSelectFile.Image = ((System.Drawing.Image)(resources.GetObject("btnSelectFile.Image")));
-            this.btnSelectFile.Location = new System.Drawing.Point(366, 183);
+            this.btnSelectFile.Location = new System.Drawing.Point(366, 201);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(28, 23);
             this.btnSelectFile.TabIndex = 14;
@@ -270,7 +277,7 @@ namespace ThinkFTP
             // btnSelectFolder
             // 
             this.btnSelectFolder.Image = ((System.Drawing.Image)(resources.GetObject("btnSelectFolder.Image")));
-            this.btnSelectFolder.Location = new System.Drawing.Point(366, 153);
+            this.btnSelectFolder.Location = new System.Drawing.Point(366, 171);
             this.btnSelectFolder.Name = "btnSelectFolder";
             this.btnSelectFolder.Size = new System.Drawing.Size(28, 23);
             this.btnSelectFolder.TabIndex = 13;
@@ -282,7 +289,7 @@ namespace ThinkFTP
             // 
             this.groupBox1.Controls.Add(this.rButtonMultipleFiles);
             this.groupBox1.Controls.Add(this.rButtonOneFIle);
-            this.groupBox1.Location = new System.Drawing.Point(9, 98);
+            this.groupBox1.Location = new System.Drawing.Point(9, 116);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(126, 66);
             this.groupBox1.TabIndex = 12;
@@ -314,7 +321,7 @@ namespace ThinkFTP
             // 
             // lblWindowsPath
             // 
-            this.lblWindowsPath.Location = new System.Drawing.Point(154, 188);
+            this.lblWindowsPath.Location = new System.Drawing.Point(154, 206);
             this.lblWindowsPath.Name = "lblWindowsPath";
             this.lblWindowsPath.Size = new System.Drawing.Size(79, 17);
             this.lblWindowsPath.TabIndex = 7;
@@ -322,7 +329,7 @@ namespace ThinkFTP
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(154, 158);
+            this.label7.Location = new System.Drawing.Point(154, 176);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(79, 17);
             this.label7.TabIndex = 5;
@@ -330,7 +337,7 @@ namespace ThinkFTP
             // 
             // lblISFile
             // 
-            this.lblISFile.Location = new System.Drawing.Point(154, 128);
+            this.lblISFile.Location = new System.Drawing.Point(154, 146);
             this.lblISFile.Name = "lblISFile";
             this.lblISFile.Size = new System.Drawing.Size(79, 17);
             this.lblISFile.TabIndex = 3;
@@ -338,7 +345,7 @@ namespace ThinkFTP
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(154, 99);
+            this.label4.Location = new System.Drawing.Point(154, 117);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 17);
             this.label4.TabIndex = 1;
@@ -346,56 +353,23 @@ namespace ThinkFTP
             // 
             // serverGB
             // 
-            this.serverGB.Controls.Add(this.btnSaveInstance);
-            this.serverGB.Controls.Add(this.cmbInstances);
-            this.serverGB.Controls.Add(this.label6);
             this.serverGB.Controls.Add(this.txtPassword);
             this.serverGB.Controls.Add(this.txtUserName);
             this.serverGB.Controls.Add(this.txtAddress);
             this.serverGB.Controls.Add(this.label3);
             this.serverGB.Controls.Add(this.label2);
             this.serverGB.Controls.Add(this.label1);
+            this.serverGB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.serverGB.Location = new System.Drawing.Point(9, 6);
             this.serverGB.Name = "serverGB";
-            this.serverGB.Size = new System.Drawing.Size(588, 82);
+            this.serverGB.Size = new System.Drawing.Size(260, 104);
             this.serverGB.TabIndex = 0;
             this.serverGB.TabStop = false;
             this.serverGB.Text = "Server Information";
             // 
-            // btnSaveInstance
-            // 
-            this.btnSaveInstance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveInstance.Location = new System.Drawing.Point(520, 23);
-            this.btnSaveInstance.Name = "btnSaveInstance";
-            this.btnSaveInstance.Size = new System.Drawing.Size(61, 46);
-            this.btnSaveInstance.TabIndex = 9;
-            this.btnSaveInstance.Text = "Save Instance";
-            this.btnSaveInstance.UseVisualStyleBackColor = true;
-            this.btnSaveInstance.Click += new System.EventHandler(this.btnSaveInstance_Click);
-            // 
-            // cmbInstances
-            // 
-            this.cmbInstances.BackColor = System.Drawing.Color.SeaShell;
-            this.cmbInstances.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbInstances.FormattingEnabled = true;
-            this.cmbInstances.Location = new System.Drawing.Point(340, 23);
-            this.cmbInstances.Name = "cmbInstances";
-            this.cmbInstances.Size = new System.Drawing.Size(155, 21);
-            this.cmbInstances.TabIndex = 99;
-            this.cmbInstances.TabStop = false;
-            this.cmbInstances.SelectedIndexChanged += new System.EventHandler(this.cmbInstances_SelectedIndexChanged);
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(277, 26);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 17);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Instance";
-            // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(277, 52);
+            this.label3.Location = new System.Drawing.Point(6, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 17);
             this.label3.TabIndex = 4;
@@ -423,7 +397,7 @@ namespace ThinkFTP
             this.otherTabPage.Location = new System.Drawing.Point(4, 22);
             this.otherTabPage.Name = "otherTabPage";
             this.otherTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.otherTabPage.Size = new System.Drawing.Size(606, 303);
+            this.otherTabPage.Size = new System.Drawing.Size(595, 317);
             this.otherTabPage.TabIndex = 1;
             this.otherTabPage.Text = "Other Server";
             this.otherTabPage.UseVisualStyleBackColor = true;
@@ -456,7 +430,7 @@ namespace ThinkFTP
             this.aboutTabPage.Location = new System.Drawing.Point(4, 22);
             this.aboutTabPage.Name = "aboutTabPage";
             this.aboutTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.aboutTabPage.Size = new System.Drawing.Size(606, 303);
+            this.aboutTabPage.Size = new System.Drawing.Size(595, 317);
             this.aboutTabPage.TabIndex = 2;
             this.aboutTabPage.Text = "About";
             // 
@@ -571,10 +545,65 @@ namespace ThinkFTP
             this.MFilesToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Error;
             this.MFilesToolTip.ToolTipTitle = "Not Useable Yet";
             // 
+            // btnDeleteInstance
+            // 
+            this.btnDeleteInstance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnDeleteInstance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeleteInstance.Location = new System.Drawing.Point(496, 58);
+            this.btnDeleteInstance.Name = "btnDeleteInstance";
+            this.btnDeleteInstance.Size = new System.Drawing.Size(80, 25);
+            this.btnDeleteInstance.TabIndex = 106;
+            this.btnDeleteInstance.Text = "Delete";
+            this.btnDeleteInstance.UseVisualStyleBackColor = true;
+            this.btnDeleteInstance.Click += new System.EventHandler(this.btnDeleteInstance_Click);
+            // 
+            // btnSaveChanges
+            // 
+            this.btnSaveChanges.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnSaveChanges.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaveChanges.Location = new System.Drawing.Point(410, 58);
+            this.btnSaveChanges.Name = "btnSaveChanges";
+            this.btnSaveChanges.Size = new System.Drawing.Size(80, 25);
+            this.btnSaveChanges.TabIndex = 105;
+            this.btnSaveChanges.Text = "Update Inst.";
+            this.btnSaveChanges.UseVisualStyleBackColor = true;
+            this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
+            // 
+            // btnSaveNewInstance
+            // 
+            this.btnSaveNewInstance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaveNewInstance.Location = new System.Drawing.Point(324, 58);
+            this.btnSaveNewInstance.Name = "btnSaveNewInstance";
+            this.btnSaveNewInstance.Size = new System.Drawing.Size(80, 25);
+            this.btnSaveNewInstance.TabIndex = 103;
+            this.btnSaveNewInstance.Text = "Save New";
+            this.btnSaveNewInstance.UseVisualStyleBackColor = true;
+            this.btnSaveNewInstance.Click += new System.EventHandler(this.btnSaveInstance_Click);
+            // 
+            // cmbInstances
+            // 
+            this.cmbInstances.BackColor = System.Drawing.Color.SeaShell;
+            this.cmbInstances.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbInstances.FormattingEnabled = true;
+            this.cmbInstances.Location = new System.Drawing.Point(384, 29);
+            this.cmbInstances.Name = "cmbInstances";
+            this.cmbInstances.Size = new System.Drawing.Size(192, 21);
+            this.cmbInstances.TabIndex = 104;
+            this.cmbInstances.TabStop = false;
+            this.cmbInstances.SelectedIndexChanged += new System.EventHandler(this.cmbInstances_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(321, 32);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 17);
+            this.label6.TabIndex = 102;
+            this.label6.Text = "Instance";
+            // 
             // txtISFIle
             // 
             this.txtISFIle.ControlToValidate = null;
-            this.txtISFIle.Location = new System.Drawing.Point(239, 125);
+            this.txtISFIle.Location = new System.Drawing.Point(239, 143);
             this.txtISFIle.Name = "txtISFIle";
             this.txtISFIle.Size = new System.Drawing.Size(155, 20);
             this.txtISFIle.TabIndex = 4;
@@ -584,7 +613,7 @@ namespace ThinkFTP
             // txtLibrary
             // 
             this.txtLibrary.ControlToValidate = this.panelButtons;
-            this.txtLibrary.Location = new System.Drawing.Point(239, 96);
+            this.txtLibrary.Location = new System.Drawing.Point(239, 114);
             this.txtLibrary.Name = "txtLibrary";
             this.txtLibrary.Size = new System.Drawing.Size(155, 20);
             this.txtLibrary.TabIndex = 3;
@@ -594,7 +623,7 @@ namespace ThinkFTP
             // txtPassword
             // 
             this.txtPassword.ControlToValidate = this.panelButtons;
-            this.txtPassword.Location = new System.Drawing.Point(340, 49);
+            this.txtPassword.Location = new System.Drawing.Point(91, 75);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(155, 20);
@@ -625,7 +654,7 @@ namespace ThinkFTP
             // txtWindowsPath
             // 
             this.txtWindowsPath.ControlToValidate = this.panelButtons;
-            this.txtWindowsPath.Location = new System.Drawing.Point(239, 155);
+            this.txtWindowsPath.Location = new System.Drawing.Point(239, 173);
             this.txtWindowsPath.Name = "txtWindowsPath";
             this.txtWindowsPath.Size = new System.Drawing.Size(155, 20);
             this.txtWindowsPath.TabIndex = 5;
@@ -635,7 +664,7 @@ namespace ThinkFTP
             // txtWindowsFile
             // 
             this.txtWindowsFile.ControlToValidate = null;
-            this.txtWindowsFile.Location = new System.Drawing.Point(239, 185);
+            this.txtWindowsFile.Location = new System.Drawing.Point(239, 203);
             this.txtWindowsFile.Name = "txtWindowsFile";
             this.txtWindowsFile.Size = new System.Drawing.Size(155, 20);
             this.txtWindowsFile.TabIndex = 6;
@@ -646,12 +675,12 @@ namespace ThinkFTP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 332);
+            this.ClientSize = new System.Drawing.Size(609, 345);
             this.Controls.Add(this.mainTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(635, 370);
-            this.MinimumSize = new System.Drawing.Size(635, 370);
+            this.MaximumSize = new System.Drawing.Size(653, 500);
+            this.MinimumSize = new System.Drawing.Size(100, 370);
             this.Name = "frmMain";
             this.Text = "Think FTP";
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -706,10 +735,7 @@ namespace ThinkFTP
         private ValidatingTextBox txtLibrary;
         private ValidatingTextBox txtWindowsPath;
         private ValidatingTextBox txtWindowsFile;
-        private System.Windows.Forms.ComboBox cmbInstances;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnSaveInstance;
         private System.Windows.Forms.Button btnClearAll;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -730,6 +756,11 @@ namespace ThinkFTP
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Button btnManual;
         private System.Windows.Forms.ToolTip MFilesToolTip;
+        private System.Windows.Forms.Button btnDeleteInstance;
+        private System.Windows.Forms.Button btnSaveChanges;
+        private System.Windows.Forms.Button btnSaveNewInstance;
+        private System.Windows.Forms.ComboBox cmbInstances;
+        private System.Windows.Forms.Label label6;
     }
 }
 

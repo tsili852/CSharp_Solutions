@@ -28,8 +28,7 @@ namespace ThinkFTP.HelpClasses
         public static List<Instance> getAllInstances()
         {
             List<Instance> list = new List<Instance>();
-
-            //var connection = new SQLiteConnection(@"Data Source=C:\ThinkFTPDatabase");
+            
             var connection = new SQLiteConnection(@"Data Source=" + dbPathWithFile);
 
             using (var context = new DataContext(connection))
@@ -55,6 +54,11 @@ namespace ThinkFTP.HelpClasses
 
                 return maxID;
             }
+        }
+
+        public static int getNewID()
+        {
+            return getMaxID() + 1;
         }
 
         public static void modifyInstance(Instance toBeModified)
@@ -88,7 +92,46 @@ namespace ThinkFTP.HelpClasses
 
         public static int saveNewInstance(Instance toBeSaved)
         {
-            return 1;
+            var connection = new SQLiteConnection(@"Data Source=" + dbPathWithFile);
+
+            using (var context = new DataContext(connection))
+            {
+
+                var a = context.GetTable<Instance>();
+                a.InsertOnSubmit(toBeSaved);
+
+                try
+                {
+                    context.SubmitChanges();
+                    return toBeSaved.id;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        public static void deleteInstance(Instance toBeDeleted)
+        {
+            var connection = new SQLiteConnection(@"Data Source=" + dbPathWithFile);
+
+            using (var context = new DataContext(connection))
+            {
+                var a = context.GetTable<Instance>();
+                a.DeleteOnSubmit(toBeDeleted);
+
+                try
+                {
+                    context.SubmitChanges();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
         }
 
         public static void createDatabase()
@@ -98,8 +141,19 @@ namespace ThinkFTP.HelpClasses
             SQLiteConnection dbConnection = new SQLiteConnection(@"Data Source=" + dbPathWithFile);
             dbConnection.Open();
 
-            string sqlCreateInstances = @"CREATE TABLE [Instances] (
-                                        [id] INTEGER NOT NULL PRIMARY KEY, 
+//            string sqlCreateInstances = @"CREATE TABLE [Instance] (
+//                                        [id] INTEGER NOT NULL PRIMARY KEY, 
+//                                        [Name] VARCHAR NOT NULL, 
+//                                        [Address] VARCHAR, 
+//                                        [UserName] VARCHAR, 
+//                                        [Library] VARCHAR, 
+//                                        [iSeriesFile] VARCHAR, 
+//                                        [WindowsPath] VARCHAR, 
+//                                        [WindowsFile] VARCHAR, 
+//                                        [Mode] CHAR(1));";
+
+            string sqlCreateInstances = @"CREATE TABLE [Instance] (
+                                        [id] INT NOT NULL, 
                                         [Name] VARCHAR NOT NULL, 
                                         [Address] VARCHAR, 
                                         [UserName] VARCHAR, 
@@ -107,9 +161,10 @@ namespace ThinkFTP.HelpClasses
                                         [iSeriesFile] VARCHAR, 
                                         [WindowsPath] VARCHAR, 
                                         [WindowsFile] VARCHAR, 
-                                        [Mode] CHAR(1));";
+                                        [Mode] CHAR(1),
+                                        CONSTRAINT [] PRIMARY KEY ([id] ASC));";
 
-            //string sqlCreateIndex = @"CREATE UNIQUE INDEX [id] ON [Instances] ([id] ASC);";
+            //string sqlCreateIndex = @"CONSTRAINT [] PRIMARY KEY ([id] ASC));";
 
             using (TransactionScope tran = new TransactionScope())
             {
@@ -123,6 +178,11 @@ namespace ThinkFTP.HelpClasses
             }
 
             dbConnection.Close();
+
+            Instance defaultInst = new Instance();
+            defaultInst.id = 1;
+            defaultInst.Name = "Default";
+            MyTools.saveNewInstance(defaultInst);
         }
 
     }

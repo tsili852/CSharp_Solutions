@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ThinkFTP")]
 [assembly: AssemblyDescription("Simple FTP client, mainly for IBM iSeries use. Multiple file send/receive is under constraction")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Unisystems")]
+[assembly: AssemblyCompany("Unisystems S.A.")]
 [assembly: AssemblyProduct("ThinkFTP")]
 [assembly: AssemblyCopyright("Unisystems Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]

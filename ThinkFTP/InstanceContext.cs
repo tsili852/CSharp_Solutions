@@ -17,7 +17,6 @@ namespace ThinkFTP
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // Chinook Database does not pluralize table names
             modelBuilder.Conventions
                 .Remove<PluralizingTableNameConvention>();
         }
