@@ -120,6 +120,9 @@ namespace ThinkFTP.HelpClasses
             using (var context = new DataContext(connection))
             {
                 var a = context.GetTable<Instance>();
+
+                a.Attach(toBeDeleted);
+                
                 a.DeleteOnSubmit(toBeDeleted);
 
                 try

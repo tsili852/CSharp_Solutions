@@ -229,6 +229,7 @@ namespace ThinkFTP
         private void btnClearAll_Click(object sender, EventArgs e)
         {
             ClearTextBoxes(this);
+            panelButtons.Enabled = false;
         }
 
         private void btnSelectFile_Click(object sender, EventArgs e)
@@ -468,6 +469,14 @@ namespace ThinkFTP
                         + cmbInstances.SelectedItem.ToString().Trim().Substring(2, cmbInstances.SelectedItem.ToString().Trim().Length - 2)
                         + " deleted !!";
                     lblStatus.BackColor = Color.PaleGreen;
+
+                    cmbInstances.Items.Clear();
+                    List<Instance> allInstances = MyTools.getAllInstances();
+                    foreach (Instance instance in allInstances)
+                    {
+                        cmbInstances.Items.Add(instance.id + ". " + instance.Name);
+                    }
+                    cmbInstances.SelectedIndex = 0;
                 }
                 catch (Exception ex)
                 {
@@ -476,6 +485,7 @@ namespace ThinkFTP
                 }
 
             }
+            btnDeleteInstance.Enabled = true;
         }
         #endregion
 
