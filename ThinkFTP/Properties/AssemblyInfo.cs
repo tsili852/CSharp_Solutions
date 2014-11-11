@@ -6,11 +6,16 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ThinkFTP")]
-[assembly: AssemblyDescription("Simple FTP client, mainly for IBM iSeries use. Multiple file send/receive is under constraction")]
+[assembly: AssemblyDescription(@"Permission is hereby granted, free of charge, to any person obtaining a copy of"  + 
+                                " this software and associated documentation files (the 'Software'), to deal in the" +  
+                                " Software without restriction, including without limitation the rights to use, copy," + 
+                                " modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and" + 
+                                " to permit persons to whom the Software is furnished to do so, subject to the following conditions:" +
+                                "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Unisystems S.A.")]
+[assembly: AssemblyCompany("basementProject")]
 [assembly: AssemblyProduct("ThinkFTP")]
-[assembly: AssemblyCopyright("Unisystems Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © 2014 [basementProject")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -504,6 +504,7 @@ namespace ThinkFTP
             this.textBoxDescription.Location = new System.Drawing.Point(124, 208);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
+            this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxDescription.Size = new System.Drawing.Size(396, 82);
             this.textBoxDescription.TabIndex = 10;
             // 
@@ -581,8 +582,8 @@ namespace ThinkFTP
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(84, 6);
+            this.pictureBox2.Image = global::ThinkFTP.Properties.Resources.bPTran;
+            this.pictureBox2.Location = new System.Drawing.Point(79, 6);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(436, 67);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -675,7 +676,7 @@ namespace ThinkFTP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 345);
+            this.ClientSize = new System.Drawing.Size(609, 346);
             this.Controls.Add(this.mainTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
