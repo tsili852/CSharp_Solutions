@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections;
 using System.Reflection;
+using System.Deployment.Application;
 using Microsoft.VisualBasic;
 using ThinkFTP.HelpClasses;
 
@@ -605,7 +606,17 @@ namespace ThinkFTP
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                try
+                {
+                    //return Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+                    return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+                    
+                }
+                catch
+                {
+                    return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                }
+                //return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
 
